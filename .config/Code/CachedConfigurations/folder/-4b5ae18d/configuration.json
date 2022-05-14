@@ -1,0 +1,1 @@
+{"content":{"settings":"{\n    \"editor.quickSuggestions\": {\n        \"comments\": true\n    },\n        \"editor.codeActionsOnSave\": {\n          \"source.fixAll.eslint\": true\n        },\n        \"eslint.validate\": [\"javascript\"]\n      \n}\n","tasks":"{}","launch":"{}"}}

@@ -1,0 +1,24 @@
+[2022-05-13 12:48:30.504] [exthost] [info] Extension host with pid 317231 started
+[2022-05-13 12:48:30.504] [exthost] [info] Skipping acquiring lock for /home/cubet/.config/Code/User/workspaceStorage/73ae41e0084915c3f7af1c5d865d8e70.
+[2022-05-13 12:48:30.604] [exthost] [info] ExtensionService#_doActivateExtension ms-azuretools.vscode-docker, startup: false, activationEvent: 'onLanguage:dockerfile'
+[2022-05-13 12:48:30.685] [exthost] [info] ExtensionService#_doActivateExtension vscode.microsoft-authentication, startup: false, activationEvent: 'onAuthenticationRequest:microsoft'
+[2022-05-13 12:48:30.706] [exthost] [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: true, activationEvent: '*'
+[2022-05-13 12:48:30.708] [exthost] [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+[2022-05-13 12:48:30.710] [exthost] [info] ExtensionService#_doActivateExtension vscode.ipynb, startup: true, activationEvent: '*'
+[2022-05-13 12:48:30.713] [exthost] [info] ExtensionService#_doActivateExtension ms-vscode-remote.remote-containers, startup: true, activationEvent: 'workspaceContains:.devcontainer/devcontainer.json'
+[2022-05-13 12:48:30.908] [exthost] [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+[2022-05-13 12:48:30.939] [exthost] [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+[2022-05-13 12:48:31.094] [exthost] [info] Eager extensions activated
+[2022-05-13 12:48:31.113] [exthost] [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+[2022-05-13 12:48:31.134] [exthost] [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onStartupFinished'
+[2022-05-13 12:48:31.140] [exthost] [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+[2022-05-13 12:48:31.142] [exthost] [info] ExtensionService#_doActivateExtension eamodio.gitlens, startup: false, activationEvent: 'onStartupFinished'
+[2022-05-13 12:50:48.866] [exthost] [info] ExtensionService#_doActivateExtension vscode.php-language-features, startup: false, activationEvent: 'onLanguage:php'
+[2022-05-13 12:51:07.582] [exthost] [warning] TextEditor is closed/disposed
+[2022-05-13 12:51:09.215] [exthost] [warning] TextEditor is closed/disposed
+[2022-05-13 12:51:09.220] [exthost] [info] ExtensionService#_doActivateExtension vscode.html-language-features, startup: false, activationEvent: 'onLanguage:html'
+[2022-05-13 12:51:10.881] [exthost] [warning] TextEditor is closed/disposed
+[2022-05-13 12:51:10.962] [exthost] [info] ExtensionService#_doActivateExtension vscode.typescript-language-features, startup: false, activationEvent: 'onLanguage:javascript'
+[2022-05-13 12:51:12.936] [exthost] [warning] TextEditor is closed/disposed
+[2022-05-13 12:52:42.762] [exthost] [warning] TextEditor is closed/disposed
+[2022-05-13 12:53:10.391] [exthost] [warning] TextEditor is closed/disposed

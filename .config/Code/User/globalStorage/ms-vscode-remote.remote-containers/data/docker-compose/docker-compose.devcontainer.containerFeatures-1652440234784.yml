@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  'oelms-app':
+    entrypoint: ["/bin/sh", "-c", "echo Container started\n
+trap \"exit 0\" 15\n
+\n
+exec \"$$@\"\n
+while sleep 1 & wait $$!; do :; done", "-", "docker-php-entrypoint"]
+    command: ["apache2-foreground"]
+    labels:
+      - vsch.local.folder=/home/cubet/backup/cubetBackup/oelms9
+      - vsch.quality=stable
+    volumes:
+      - vscode:/vscode
+volumes:
+  vscode:
+    external: true

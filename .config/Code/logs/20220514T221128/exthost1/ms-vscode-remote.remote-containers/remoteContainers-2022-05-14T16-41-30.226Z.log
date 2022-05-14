@@ -1,0 +1,397 @@
+[2022-05-14T16:41:30.278Z] Remote-Containers 0.234.0 in VS Code 1.67.1 (da15b6fd3ef856477bf6f4fb29ba1b7af717770d).
+[2022-05-14T16:41:30.278Z] Start: Resolving Remote
+[2022-05-14T16:41:30.286Z] Setting up container for folder or workspace: /home/cubet/backup/cubetBackup/oelms9
+[2022-05-14T16:41:30.288Z] Start: Check Docker is running
+[2022-05-14T16:41:30.289Z] Start: Run: docker version --format {{.Server.APIVersion}}
+[2022-05-14T16:41:30.398Z] Stop (109 ms): Run: docker version --format {{.Server.APIVersion}}
+[2022-05-14T16:41:30.398Z] Server API version: 1.41
+[2022-05-14T16:41:30.399Z] Stop (111 ms): Check Docker is running
+[2022-05-14T16:41:30.399Z] Start: Run: docker volume ls -q
+[2022-05-14T16:41:30.422Z] Stop (23 ms): Run: docker volume ls -q
+[2022-05-14T16:41:30.551Z] Start: Run: docker ps -q -a --filter label=vsch.local.folder=/home/cubet/backup/cubetBackup/oelms9 --filter label=vsch.quality=stable
+[2022-05-14T16:41:30.591Z] Stop (40 ms): Run: docker ps -q -a --filter label=vsch.local.folder=/home/cubet/backup/cubetBackup/oelms9 --filter label=vsch.quality=stable
+[2022-05-14T16:41:30.592Z] Start: Run: docker inspect --type container 23f1fa7f58ba
+[2022-05-14T16:41:30.615Z] Stop (23 ms): Run: docker inspect --type container 23f1fa7f58ba
+[2022-05-14T16:41:30.616Z] Start: Run: /usr/share/code/code /home/cubet/.vscode/extensions/ms-vscode-remote.remote-containers-0.234.0/dist/spec-node/devContainersSpecCLI.js up --user-data-folder /home/cubet/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/data --container-data-folder .vscode-server/data/Machine --container-system-data-folder /var/vscode-server --workspace-folder /home/cubet/backup/cubetBackup/oelms9 --workspace-mount-consistency cached --id-label vsch.local.folder=/home/cubet/backup/cubetBackup/oelms9 --id-label vsch.quality=stable --log-level debug --log-format json --config /home/cubet/backup/cubetBackup/oelms9/.devcontainer/devcontainer.json --default-user-env-probe loginInteractiveShell --mount type=volume,source=vscode,target=/vscode,external=true --skip-post-create --update-remote-user-uid-default on --mount-workspace-git-root true
+[2022-05-14T16:41:30.762Z] remote-containers 0.234.0.
+[2022-05-14T16:41:30.762Z] Start: Resolving Remote
+[2022-05-14T16:41:30.774Z] Start: Run: docker-compose version --short
+[2022-05-14T16:41:31.058Z] Stop (284 ms): Run: docker-compose version --short
+[2022-05-14T16:41:31.058Z] Start: Run: docker ps -q -a --filter label=com.docker.compose.project=docker --filter label=com.docker.compose.service=oelms-app
+[2022-05-14T16:41:31.079Z] Stop (21 ms): Run: docker ps -q -a --filter label=com.docker.compose.project=docker --filter label=com.docker.compose.service=oelms-app
+[2022-05-14T16:41:31.080Z] Start: Run: docker inspect --type container 23f1fa7f58ba
+[2022-05-14T16:41:31.102Z] Stop (22 ms): Run: docker inspect --type container 23f1fa7f58ba
+[2022-05-14T16:41:31.103Z] Start: Run: docker-compose -f /home/cubet/backup/cubetBackup/oelms9/docker/docker-compose.yml config
+[2022-05-14T16:41:31.365Z] Stop (262 ms): Run: docker-compose -f /home/cubet/backup/cubetBackup/oelms9/docker/docker-compose.yml config
+[2022-05-14T16:41:31.365Z] networks:
+  laravel-oelms:
+    driver: bridge
+services:
+  mailhog:
+    container_name: oelms-mail
+    image: mailhog/mailhog
+    logging:
+      driver: none
+    networks:
+      laravel-oelms: null
+    ports:
+    - published: 1025
+      target: 1025
+    - published: 8025
+      target: 8025
+  mysql:
+    command: mysqld --sql_mode="NO_ENGINE_SUBSTITUTION"
+    container_name: oelms-laravel-db
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: openelms_dev
+      MYSQL_PASSWORD: dev
+      MYSQL_ROOT_PASSWORD: dev
+      MYSQL_USER: dev
+    image: mariadb:10.3.32
+    networks:
+      laravel-oelms: null
+    ports:
+    - published: 3306
+      target: 3306
+    restart: unless-stopped
+    volumes:
+    - /home/cubet/backup/cubetBackup/oelms9/docker/database/dbdata:/var/lib/mysql:rw
+  oelms-app:
+    build:
+      context: /home/cubet/backup/cubetBackup/oelms9/docker
+      dockerfile: ./Dockerfile
+    container_name: oelms-app
+    depends_on:
+      mysql:
+        condition: service_started
+    environment:
+      XDEBUG_CONFIG: remote_host=172.17.0.1
+    extra_hosts:
+    - openlms.local.com:127.0.0.1
+    image: laravel_apache
+    networks:
+      laravel-oelms: null
+    ports:
+    - published: 80
+      target: 80
+    user: root
+    volumes:
+    - /home/cubet/backup/cubetBackup/oelms9:/var/www/html:rw
+    - /home/cubet/backup/cubetBackup/oelms9/docker/config/logs:/var/log/cron:rw
+    - /home/cubet/backup/cubetBackup/oelms9/docker/tmp:/tmp:rw
+  phpmyadmin:
+    container_name: oelms-phpmyadmin
+    environment:
+      MYSQL_PASSWORD: dev
+      MYSQL_ROOT_PASSWORD: dev
+      MYSQL_USER: dev
+      PMA_HOST: oelms-laravel-db
+      UPLOAD_LIMIT: 700M
+    image: phpmyadmin/phpmyadmin
+    links:
+    - mysql
+    networks:
+      laravel-oelms: null
+    ports:
+    - published: 8000
+      target: 80
+version: '3.7'
+
+[2022-05-14T16:41:31.370Z] Start: Run: docker -v
+[2022-05-14T16:41:31.399Z] Stop (29 ms): Run: docker -v
+[2022-05-14T16:41:31.400Z] Start: Run: docker events --format {{json .}} --filter event=start
+[2022-05-14T16:41:31.403Z] PersistedPath=/home/cubet/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/data, ContainerHasLabels=true
+[2022-05-14T16:41:31.403Z] Container was created with these config files: /home/cubet/backup/cubetBackup/oelms9/docker/docker-compose.yml,/home/cubet/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/data/docker-compose/docker-compose.devcontainer.containerFeatures-1652443403124.yml
+[2022-05-14T16:41:31.406Z] Restoring /home/cubet/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/data/docker-compose/docker-compose.devcontainer.containerFeatures-1652443403124.yml from persisted storage
+[2022-05-14T16:41:31.407Z] Start: Run: docker-compose --project-name docker -f /home/cubet/backup/cubetBackup/oelms9/docker/docker-compose.yml -f /home/cubet/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/data/docker-compose/docker-compose.devcontainer.containerFeatures-1652443403124.yml up -d
+[2022-05-14T16:41:31.784Z] oelms-laravel-db is up-to-date
+[2022-05-14T16:41:31.784Z] Starting oelms-mail ... 
+[2022-05-14T16:41:31.787Z] Starting oelms-app  ... 
+[2022-05-14T16:41:31.788Z] Starting oelms-phpmyadmin ... 
+[2022-05-14T16:41:32.444Z] Starting oelms-app        ... done
+[2022-05-14T16:41:32.448Z] Stop (1048 ms): Run: docker events --format {{json .}} --filter event=start
+[2022-05-14T16:41:32.555Z] Starting oelms-phpmyadmin ... done
+[2022-05-14T16:41:32.655Z] Starting oelms-mail       ... done
+[2022-05-14T16:41:32.754Z] Stop (1347 ms): Run: docker-compose --project-name docker -f /home/cubet/backup/cubetBackup/oelms9/docker/docker-compose.yml -f /home/cubet/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/data/docker-compose/docker-compose.devcontainer.containerFeatures-1652443403124.yml up -d
+[2022-05-14T16:41:32.755Z] Start: Run: docker ps -q -a --filter label=com.docker.compose.project=docker --filter label=com.docker.compose.service=oelms-app
+[2022-05-14T16:41:32.798Z] Stop (43 ms): Run: docker ps -q -a --filter label=com.docker.compose.project=docker --filter label=com.docker.compose.service=oelms-app
+[2022-05-14T16:41:32.799Z] Start: Run: docker inspect --type container 23f1fa7f58ba
+[2022-05-14T16:41:32.837Z] Stop (38 ms): Run: docker inspect --type container 23f1fa7f58ba
+[2022-05-14T16:41:32.837Z] Start: Inspecting container
+[2022-05-14T16:41:32.837Z] Start: Run: docker inspect --type container 23f1fa7f58ba37f79531b95b27ab7042f287eaf5e75bb3ab1aa60c5176b57ba0
+[2022-05-14T16:41:32.872Z] Stop (35 ms): Run: docker inspect --type container 23f1fa7f58ba37f79531b95b27ab7042f287eaf5e75bb3ab1aa60c5176b57ba0
+[2022-05-14T16:41:32.873Z] Stop (36 ms): Inspecting container
+[2022-05-14T16:41:32.875Z] Start: Run in container: /bin/sh
+[2022-05-14T16:41:32.879Z] Start: Run in container: uname -m
+[2022-05-14T16:41:33.008Z] x86_64
+[2022-05-14T16:41:33.008Z] 
+[2022-05-14T16:41:33.008Z] Stop (129 ms): Run in container: uname -m
+[2022-05-14T16:41:33.008Z] Start: Run in container: (cat /etc/os-release || cat /usr/lib/os-release) 2>/dev/null
+[2022-05-14T16:41:33.011Z] PRETTY_NAME="Debian GNU/Linux 10 (buster)"
+NAME="Debian GNU/Linux"
+VERSION_ID="10"
+VERSION="10 (buster)"
+VERSION_CODENAME=buster
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+[2022-05-14T16:41:33.011Z] 
+[2022-05-14T16:41:33.011Z] Stop (3 ms): Run in container: (cat /etc/os-release || cat /usr/lib/os-release) 2>/dev/null
+[2022-05-14T16:41:33.012Z] Start: Run in container: cat /etc/passwd
+[2022-05-14T16:41:33.015Z] Stop (3 ms): Run in container: cat /etc/passwd
+[2022-05-14T16:41:33.015Z] Start: Run in container: test -f '/var/vscode-server/.patchEtcEnvironmentMarker'
+[2022-05-14T16:41:33.017Z] 
+[2022-05-14T16:41:33.017Z] 
+[2022-05-14T16:41:33.017Z] Stop (2 ms): Run in container: test -f '/var/vscode-server/.patchEtcEnvironmentMarker'
+[2022-05-14T16:41:33.017Z] Start: Run in container: test -f '/var/vscode-server/.patchEtcProfileMarker'
+[2022-05-14T16:41:33.019Z] 
+[2022-05-14T16:41:33.019Z] 
+[2022-05-14T16:41:33.019Z] Stop (2 ms): Run in container: test -f '/var/vscode-server/.patchEtcProfileMarker'
+[2022-05-14T16:41:33.019Z] Stop (2257 ms): Resolving Remote
+[2022-05-14T16:41:33.026Z] Stop (2410 ms): Run: /usr/share/code/code /home/cubet/.vscode/extensions/ms-vscode-remote.remote-containers-0.234.0/dist/spec-node/devContainersSpecCLI.js up --user-data-folder /home/cubet/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/data --container-data-folder .vscode-server/data/Machine --container-system-data-folder /var/vscode-server --workspace-folder /home/cubet/backup/cubetBackup/oelms9 --workspace-mount-consistency cached --id-label vsch.local.folder=/home/cubet/backup/cubetBackup/oelms9 --id-label vsch.quality=stable --log-level debug --log-format json --config /home/cubet/backup/cubetBackup/oelms9/.devcontainer/devcontainer.json --default-user-env-probe loginInteractiveShell --mount type=volume,source=vscode,target=/vscode,external=true --skip-post-create --update-remote-user-uid-default on --mount-workspace-git-root true
+[2022-05-14T16:41:33.026Z] Start: Run: docker inspect --type container 23f1fa7f58ba37f79531b95b27ab7042f287eaf5e75bb3ab1aa60c5176b57ba0
+[2022-05-14T16:41:33.083Z] Stop (57 ms): Run: docker inspect --type container 23f1fa7f58ba37f79531b95b27ab7042f287eaf5e75bb3ab1aa60c5176b57ba0
+[2022-05-14T16:41:33.085Z] Start: Run: /usr/share/code/code /home/cubet/.vscode/extensions/ms-vscode-remote.remote-containers-0.234.0/dist/spec-node/devContainersSpecCLI.js read-configuration --workspace-folder /home/cubet/backup/cubetBackup/oelms9 --log-level debug --log-format json --config /home/cubet/backup/cubetBackup/oelms9/.devcontainer/devcontainer.json --mount-workspace-git-root true
+[2022-05-14T16:41:33.360Z] Stop (275 ms): Run: /usr/share/code/code /home/cubet/.vscode/extensions/ms-vscode-remote.remote-containers-0.234.0/dist/spec-node/devContainersSpecCLI.js read-configuration --workspace-folder /home/cubet/backup/cubetBackup/oelms9 --log-level debug --log-format json --config /home/cubet/backup/cubetBackup/oelms9/.devcontainer/devcontainer.json --mount-workspace-git-root true
+[2022-05-14T16:41:33.362Z] Start: Run: docker-compose version --short
+[2022-05-14T16:41:33.706Z] Stop (344 ms): Run: docker-compose version --short
+[2022-05-14T16:41:33.707Z] Start: Inspecting container
+[2022-05-14T16:41:33.707Z] Start: Run: docker inspect --type container 23f1fa7f58ba37f79531b95b27ab7042f287eaf5e75bb3ab1aa60c5176b57ba0
+[2022-05-14T16:41:33.734Z] Stop (27 ms): Run: docker inspect --type container 23f1fa7f58ba37f79531b95b27ab7042f287eaf5e75bb3ab1aa60c5176b57ba0
+[2022-05-14T16:41:33.734Z] Stop (27 ms): Inspecting container
+[2022-05-14T16:41:33.735Z] Start: Run in container: /bin/sh
+[2022-05-14T16:41:33.738Z] Start: Run in container: uname -m
+[2022-05-14T16:41:33.847Z] x86_64
+[2022-05-14T16:41:33.848Z] 
+[2022-05-14T16:41:33.848Z] Stop (110 ms): Run in container: uname -m
+[2022-05-14T16:41:33.848Z] Start: Run in container: (cat /etc/os-release || cat /usr/lib/os-release) 2>/dev/null
+[2022-05-14T16:41:33.850Z] PRETTY_NAME="Debian GNU/Linux 10 (buster)"
+NAME="Debian GNU/Linux"
+VERSION_ID="10"
+VERSION="10 (buster)"
+VERSION_CODENAME=buster
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+[2022-05-14T16:41:33.850Z] 
+[2022-05-14T16:41:33.851Z] Stop (3 ms): Run in container: (cat /etc/os-release || cat /usr/lib/os-release) 2>/dev/null
+[2022-05-14T16:41:33.851Z] Start: Run in container: cat /etc/passwd
+[2022-05-14T16:41:33.853Z] Stop (2 ms): Run in container: cat /etc/passwd
+[2022-05-14T16:41:33.854Z] Start: Setup shutdown monitor
+[2022-05-14T16:41:33.855Z] Forking shutdown monitor: /home/cubet/.vscode/extensions/ms-vscode-remote.remote-containers-0.234.0/dist/shutdown/shutdownMonitorProcess /run/user/1000/vscode-remote-containers-13d81c0cd778a5ef34509b2a4b2067750c625522.sock dockerCompose Debug /home/cubet/.config/Code/logs/20220514T221128/exthost1/ms-vscode-remote.remote-containers 1652546490226
+[2022-05-14T16:41:33.860Z] Stop (6 ms): Setup shutdown monitor
+[2022-05-14T16:41:33.861Z] Start: Run in container: test -d /root/.vscode-server
+[2022-05-14T16:41:33.869Z] 
+[2022-05-14T16:41:33.869Z] 
+[2022-05-14T16:41:33.869Z] Stop (8 ms): Run in container: test -d /root/.vscode-server
+[2022-05-14T16:41:33.870Z] Start: Run in container: test ! -f '/root/.vscode-server/data/Machine/.writeMachineSettingsMarker' && set -o noclobber && mkdir -p '/root/.vscode-server/data/Machine' && { > '/root/.vscode-server/data/Machine/.writeMachineSettingsMarker' ; } 2> /dev/null
+[2022-05-14T16:41:33.872Z] 
+[2022-05-14T16:41:33.873Z] 
+[2022-05-14T16:41:33.873Z] Exit code 1
+[2022-05-14T16:41:33.873Z] Stop (3 ms): Run in container: test ! -f '/root/.vscode-server/data/Machine/.writeMachineSettingsMarker' && set -o noclobber && mkdir -p '/root/.vscode-server/data/Machine' && { > '/root/.vscode-server/data/Machine/.writeMachineSettingsMarker' ; } 2> /dev/null
+[2022-05-14T16:41:33.873Z] Start: Run in container: cat /root/.vscode-server/data/Machine/settings.json
+[2022-05-14T16:41:33.878Z] {
+	"php.validate.executablePath": "/usr/local/bin/php",
+	"remote.localPortHost": "allInterfaces",
+	"workbench.colorTheme": "One Dark Pro Darker",
+	"workbench.iconTheme": "material-icon-theme",
+	"editor.fontSize": 20,
+	"editor.lineHeight": 30,
+	"editor.fontFamily": "JetBrains Mono"
+}
+[2022-05-14T16:41:33.878Z] 
+[2022-05-14T16:41:33.879Z] Stop (6 ms): Run in container: cat /root/.vscode-server/data/Machine/settings.json
+[2022-05-14T16:41:33.881Z] Start: Run in container: test -d /root/.vscode-server/bin/da15b6fd3ef856477bf6f4fb29ba1b7af717770d
+[2022-05-14T16:41:33.884Z] 
+[2022-05-14T16:41:33.884Z] 
+[2022-05-14T16:41:33.884Z] Stop (3 ms): Run in container: test -d /root/.vscode-server/bin/da15b6fd3ef856477bf6f4fb29ba1b7af717770d
+[2022-05-14T16:41:33.885Z] Start: Run in container: test -d /vscode/vscode-server/bin/linux-x64/da15b6fd3ef856477bf6f4fb29ba1b7af717770d
+[2022-05-14T16:41:33.886Z] 
+[2022-05-14T16:41:33.886Z] 
+[2022-05-14T16:41:33.887Z] Stop (2 ms): Run in container: test -d /vscode/vscode-server/bin/linux-x64/da15b6fd3ef856477bf6f4fb29ba1b7af717770d
+[2022-05-14T16:41:33.887Z] Start: Run in container: touch '/vscode/vscode-server/bin/linux-x64/da15b6fd3ef856477bf6f4fb29ba1b7af717770d'
+[2022-05-14T16:41:33.887Z] Start: Launching Remote-Containers helper.
+[2022-05-14T16:41:33.888Z] ssh-agent: SSH_AUTH_SOCK not set on host.
+[2022-05-14T16:41:33.889Z] Start: Run: gpgconf --list-dir agent-extra-socket
+[2022-05-14T16:41:33.894Z] 
+[2022-05-14T16:41:33.895Z] 
+[2022-05-14T16:41:33.895Z] Stop (8 ms): Run in container: touch '/vscode/vscode-server/bin/linux-x64/da15b6fd3ef856477bf6f4fb29ba1b7af717770d'
+[2022-05-14T16:41:33.895Z] Stop (6 ms): Run: gpgconf --list-dir agent-extra-socket
+[2022-05-14T16:41:33.895Z] /run/user/1000/gnupg/S.gpg-agent.extra
+[2022-05-14T16:41:33.895Z] 
+[2022-05-14T16:41:33.896Z] Start: Run in container: gpgconf --list-dir agent-socket
+[2022-05-14T16:41:33.903Z] /root/.gnupg/S.gpg-agent
+[2022-05-14T16:41:33.903Z] 
+[2022-05-14T16:41:33.904Z] Stop (8 ms): Run in container: gpgconf --list-dir agent-socket
+[2022-05-14T16:41:33.904Z] Start: Run in container: gpgconf --list-dir homedir
+[2022-05-14T16:41:33.906Z] /root/.gnupg
+[2022-05-14T16:41:33.906Z] 
+[2022-05-14T16:41:33.906Z] Stop (2 ms): Run in container: gpgconf --list-dir homedir
+[2022-05-14T16:41:33.907Z] Start: Run in container: ls '/root/.gnupg/private-keys-v1.d' 2>/dev/null
+[2022-05-14T16:41:33.912Z] 
+[2022-05-14T16:41:33.912Z] 
+[2022-05-14T16:41:33.913Z] Exit code 2
+[2022-05-14T16:41:33.913Z] Stop (6 ms): Run in container: ls '/root/.gnupg/private-keys-v1.d' 2>/dev/null
+[2022-05-14T16:41:33.913Z] Start: Run in container: mkdir -p -m 700 '/root/.gnupg'
+[2022-05-14T16:41:33.915Z] Start: Run in container: /bin/sh
+[2022-05-14T16:41:33.916Z] Stop (29 ms): Launching Remote-Containers helper.
+[2022-05-14T16:41:33.920Z] userEnvProbe: loginInteractiveShell (default)
+[2022-05-14T16:41:33.921Z] Start: Run in container: echo ~
+[2022-05-14T16:41:33.922Z] userEnvProbe shell: /bin/bash
+[2022-05-14T16:41:33.922Z] 
+[2022-05-14T16:41:33.923Z] 
+[2022-05-14T16:41:33.923Z] Stop (10 ms): Run in container: mkdir -p -m 700 '/root/.gnupg'
+[2022-05-14T16:41:33.923Z] Start: Run: gpgconf --list-dir homedir
+[2022-05-14T16:41:33.930Z] Stop (7 ms): Run: gpgconf --list-dir homedir
+[2022-05-14T16:41:33.930Z] /home/cubet/.gnupg
+[2022-05-14T16:41:33.930Z] 
+[2022-05-14T16:41:33.931Z] Start: Run in container: gpgconf --list-dir homedir
+[2022-05-14T16:41:33.933Z] /root/.gnupg
+[2022-05-14T16:41:33.934Z] 
+[2022-05-14T16:41:33.934Z] Stop (3 ms): Run in container: gpgconf --list-dir homedir
+[2022-05-14T16:41:33.934Z] Start: Run in container: # Test for /root/.ssh/known_hosts and ssh
+[2022-05-14T16:41:33.936Z] /root/.ssh/known_hosts exists
+[2022-05-14T16:41:33.936Z] 
+[2022-05-14T16:41:33.936Z] Exit code 1
+[2022-05-14T16:41:33.936Z] Stop (2 ms): Run in container: # Test for /root/.ssh/known_hosts and ssh
+[2022-05-14T16:41:33.936Z] Start: Run in container: # Test for /root/.gnupg/pubring.kbx and gpg
+[2022-05-14T16:41:33.938Z] /root/.gnupg/pubring.kbx exists
+[2022-05-14T16:41:33.938Z] 
+[2022-05-14T16:41:33.938Z] Exit code 1
+[2022-05-14T16:41:33.939Z] Stop (3 ms): Run in container: # Test for /root/.gnupg/pubring.kbx and gpg
+[2022-05-14T16:41:33.939Z] Start: Run in container: command -v git >/dev/null 2>&1 && git config --system --replace-all credential.helper '!f() { /root/.vscode-server/bin/da15b6fd3ef856477bf6f4fb29ba1b7af717770d/node /tmp/vscode-remote-containers-f6577d58ea4d6f55a5071d9d837f8196abfa5a7a.js $*; }; f' || true
+[2022-05-14T16:41:33.959Z] 
+[2022-05-14T16:41:33.960Z] 
+[2022-05-14T16:41:33.960Z] Stop (21 ms): Run in container: command -v git >/dev/null 2>&1 && git config --system --replace-all credential.helper '!f() { /root/.vscode-server/bin/da15b6fd3ef856477bf6f4fb29ba1b7af717770d/node /tmp/vscode-remote-containers-f6577d58ea4d6f55a5071d9d837f8196abfa5a7a.js $*; }; f' || true
+[2022-05-14T16:41:33.960Z] Start: Run in container: # Test for /root/.gnupg/trustdb.gpg and gpg
+[2022-05-14T16:41:33.963Z] /root/.gnupg/trustdb.gpg exists
+[2022-05-14T16:41:33.963Z] 
+[2022-05-14T16:41:33.963Z] Exit code 1
+[2022-05-14T16:41:33.963Z] Stop (3 ms): Run in container: # Test for /root/.gnupg/trustdb.gpg and gpg
+[2022-05-14T16:41:33.963Z] Start: Run in container: for pid in `cd /proc && ls -d [0-9]*`; do { echo $pid ; readlink /proc/$pid/cwd ; readlink /proc/$pid/ns/mnt ; cat /proc/$pid/stat | tr "
+[2022-05-14T16:41:33.964Z] Start: Run: gpg-connect-agent updatestartuptty /bye
+[2022-05-14T16:41:33.979Z] Stop (15 ms): Run: gpg-connect-agent updatestartuptty /bye
+[2022-05-14T16:41:34.050Z] /root
+[2022-05-14T16:41:34.050Z] 
+[2022-05-14T16:41:34.050Z] Stop (129 ms): Run in container: echo ~
+[2022-05-14T16:41:34.050Z] Start: Run in container: cat <<'EOF-/tmp/vscode-remote-containers-f6577d58ea4d6f55a5071d9d837f8196abfa5a7a.js' >/tmp/vscode-remote-containers-f6577d58ea4d6f55a5071d9d837f8196abfa5a7a.js
+[2022-05-14T16:41:34.053Z] Stop (90 ms): Run in container: for pid in `cd /proc && ls -d [0-9]*`; do { echo $pid ; readlink /proc/$pid/cwd ; readlink /proc/$pid/ns/mnt ; cat /proc/$pid/stat | tr "
+[2022-05-14T16:41:34.055Z] Start: Run in container: cat '/root/.vscode-server/data/Machine/.connection-token-da15b6fd3ef856477bf6f4fb29ba1b7af717770d' 2>/dev/null || (umask 377 && echo 'e85bf93e-82a7-469b-9364-b3466ee4f297' >'/root/.vscode-server/data/Machine/.connection-token-da15b6fd3ef856477bf6f4fb29ba1b7af717770d-047265f1-e80b-4c9f-9bca-538e6c0ae977' && mv -n '/root/.vscode-server/data/Machine/.connection-token-da15b6fd3ef856477bf6f4fb29ba1b7af717770d-047265f1-e80b-4c9f-9bca-538e6c0ae977' '/root/.vscode-server/data/Machine/.connection-token-da15b6fd3ef856477bf6f4fb29ba1b7af717770d' && rm -f '/root/.vscode-server/data/Machine/.connection-token-da15b6fd3ef856477bf6f4fb29ba1b7af717770d-047265f1-e80b-4c9f-9bca-538e6c0ae977' && cat '/root/.vscode-server/data/Machine/.connection-token-da15b6fd3ef856477bf6f4fb29ba1b7af717770d')
+[2022-05-14T16:41:34.058Z] cd93080c-7543-48bd-b76c-8f97c0a36990
+[2022-05-14T16:41:34.058Z] 
+[2022-05-14T16:41:34.058Z] Stop (3 ms): Run in container: cat '/root/.vscode-server/data/Machine/.connection-token-da15b6fd3ef856477bf6f4fb29ba1b7af717770d' 2>/dev/null || (umask 377 && echo 'e85bf93e-82a7-469b-9364-b3466ee4f297' >'/root/.vscode-server/data/Machine/.connection-token-da15b6fd3ef856477bf6f4fb29ba1b7af717770d-047265f1-e80b-4c9f-9bca-538e6c0ae977' && mv -n '/root/.vscode-server/data/Machine/.connection-token-da15b6fd3ef856477bf6f4fb29ba1b7af717770d-047265f1-e80b-4c9f-9bca-538e6c0ae977' '/root/.vscode-server/data/Machine/.connection-token-da15b6fd3ef856477bf6f4fb29ba1b7af717770d' && rm -f '/root/.vscode-server/data/Machine/.connection-token-da15b6fd3ef856477bf6f4fb29ba1b7af717770d-047265f1-e80b-4c9f-9bca-538e6c0ae977' && cat '/root/.vscode-server/data/Machine/.connection-token-da15b6fd3ef856477bf6f4fb29ba1b7af717770d')
+[2022-05-14T16:41:34.059Z] Start: Starting VS Code Server
+[2022-05-14T16:41:34.060Z] Start: Preparing Extensions
+[2022-05-14T16:41:34.061Z] Start: Run in container: test ! -f '/root/.vscode-server/data/Machine/.installExtensionsMarker' && set -o noclobber && mkdir -p '/root/.vscode-server/data/Machine' && { > '/root/.vscode-server/data/Machine/.installExtensionsMarker' ; } 2> /dev/null
+[2022-05-14T16:41:34.063Z] 
+[2022-05-14T16:41:34.063Z] 
+[2022-05-14T16:41:34.063Z] Exit code 1
+[2022-05-14T16:41:34.063Z] Stop (2 ms): Run in container: test ! -f '/root/.vscode-server/data/Machine/.installExtensionsMarker' && set -o noclobber && mkdir -p '/root/.vscode-server/data/Machine' && { > '/root/.vscode-server/data/Machine/.installExtensionsMarker' ; } 2> /dev/null
+[2022-05-14T16:41:34.065Z] Extensions cache, install extensions: None
+[2022-05-14T16:41:34.065Z] Start: Run in container: test -d /root/.vscode-server/extensionsCache && ls /root/.vscode-server/extensionsCache || true
+[2022-05-14T16:41:34.068Z] anseki.vscode-color-0.4.5
+bmewburn.vscode-intelephense-client-1.8.2
+davidanson.vscode-markdownlint-0.47.0
+dbaeumer.vscode-eslint-2.2.2
+eamodio.gitlens-12.0.6
+faelv.composer-companion-0.2.6
+kimlimjustin.jsdoc-generator-0.0.4
+mehedidracula.php-namespace-resolver-1.1.8
+ms-azuretools.vscode-docker-1.22.0
+myyrakle.swagger-jsdoc-0.4.9
+naumovs.color-highlight-2.5.0
+pkief.material-icon-theme-4.17.0
+stevencl.adddoccomments-0.0.8
+timonwong.shellcheck-0.19.2
+xdebug.php-debug-1.26.1
+zhuangtongfa.material-theme-3.13.29
+[2022-05-14T16:41:34.068Z] 
+[2022-05-14T16:41:34.068Z] Stop (3 ms): Run in container: test -d /root/.vscode-server/extensionsCache && ls /root/.vscode-server/extensionsCache || true
+[2022-05-14T16:41:34.068Z] Start: Run in container: test -d /vscode/vscode-server/extensionsCache && ls /vscode/vscode-server/extensionsCache || true
+[2022-05-14T16:41:34.072Z] anseki.vscode-color-0.4.5
+bmewburn.vscode-intelephense-client-1.8.2
+davidanson.vscode-markdownlint-0.47.0
+dbaeumer.vscode-eslint-2.2.2
+eamodio.gitlens-12.0.6
+faelv.composer-companion-0.2.6
+kimlimjustin.jsdoc-generator-0.0.4
+mehedidracula.php-namespace-resolver-1.1.8
+ms-azuretools.vscode-docker-1.22.0
+myyrakle.swagger-jsdoc-0.4.9
+naumovs.color-highlight-2.5.0
+pkief.material-icon-theme-4.17.0
+stevencl.adddoccomments-0.0.8
+timonwong.shellcheck-0.19.2
+xdebug.php-debug-1.26.1
+zhuangtongfa.material-theme-3.13.24
+zhuangtongfa.material-theme-3.13.25
+zhuangtongfa.material-theme-3.13.29
+[2022-05-14T16:41:34.072Z] 
+[2022-05-14T16:41:34.072Z] Stop (4 ms): Run in container: test -d /vscode/vscode-server/extensionsCache && ls /vscode/vscode-server/extensionsCache || true
+[2022-05-14T16:41:34.073Z] Extensions cache, link in container: None
+[2022-05-14T16:41:34.073Z] Stop (13 ms): Preparing Extensions
+[2022-05-14T16:41:34.073Z] Start: Run in container: /root/.vscode-server/bin/da15b6fd3ef856477bf6f4fb29ba1b7af717770d/bin/code-server --log debug --force-disable-user-env --server-data-dir /root/.vscode-server --use-host-proxy --telemetry-level all --accept-server-license-terms --host 127.0.0.1 --port 0 --connection-token-file /root/.vscode-server/data/Machine/.connection-token-da15b6fd3ef856477bf6f4fb29ba1b7af717770d --extensions-download-dir /root/.vscode-server/extensionsCache --start-server --disable-websocket-compression
+[2022-05-14T16:41:34.332Z] 
+[2022-05-14T16:41:34.333Z] 
+[2022-05-14T16:41:34.333Z] Stop (283 ms): Run in container: cat <<'EOF-/tmp/vscode-remote-containers-f6577d58ea4d6f55a5071d9d837f8196abfa5a7a.js' >/tmp/vscode-remote-containers-f6577d58ea4d6f55a5071d9d837f8196abfa5a7a.js
+[2022-05-14T16:41:34.333Z] Start: Run in container: cat <<'EOF-/tmp/vscode-remote-containers-server-f6577d58ea4d6f55a5071d9d837f8196abfa5a7a.js' >/tmp/vscode-remote-containers-server-f6577d58ea4d6f55a5071d9d837f8196abfa5a7a.js_1652546494333
+[2022-05-14T16:41:34.352Z] 
+[2022-05-14T16:41:34.352Z] 
+[2022-05-14T16:41:34.352Z] Stop (19 ms): Run in container: cat <<'EOF-/tmp/vscode-remote-containers-server-f6577d58ea4d6f55a5071d9d837f8196abfa5a7a.js' >/tmp/vscode-remote-containers-server-f6577d58ea4d6f55a5071d9d837f8196abfa5a7a.js_1652546494333
+[2022-05-14T16:41:34.396Z] *
+* Visual Studio Code Server
+*
+* By using the software, you agree to
+* the Visual Studio Code Server License Terms (https://aka.ms/vscode-server-license) and
+* the Microsoft Privacy Statement (https://privacy.microsoft.com/en-US/privacystatement).
+*
+[2022-05-14T16:41:34.404Z] Server bound to 127.0.0.1:34823 (IPv4)
+Extension host agent listening on 34823
+
+[2022-05-14T16:41:34.405Z] Stop (346 ms): Starting VS Code Server
+[2022-05-14T16:41:34.405Z] Start: Run in container: echo 34823 >'/root/.vscode-server/data/Machine/.devport-da15b6fd3ef856477bf6f4fb29ba1b7af717770d'
+[2022-05-14T16:41:34.407Z] 
+[2022-05-14T16:41:34.408Z] 
+[2022-05-14T16:41:34.408Z] Stop (3 ms): Run in container: echo 34823 >'/root/.vscode-server/data/Machine/.devport-da15b6fd3ef856477bf6f4fb29ba1b7af717770d'
+[2022-05-14T16:41:34.409Z] Port forwarding for container port 34823 starts listening on local port.
+[2022-05-14T16:41:34.411Z] Port forwarding local port 34823 to container port 34823
+[2022-05-14T16:41:34.412Z] Start: Run in container: # Test for /root/.gitconfig and git
+[2022-05-14T16:41:34.414Z] /root/.gitconfig exists
+[2022-05-14T16:41:34.414Z] 
+[2022-05-14T16:41:34.414Z] Exit code 1
+[2022-05-14T16:41:34.414Z] Stop (2 ms): Run in container: # Test for /root/.gitconfig and git
+[2022-05-14T16:41:34.415Z] Start: Run in container: command -v git >/dev/null 2>&1 && git config --global --replace-all credential.helper '!f() { /root/.vscode-server/bin/da15b6fd3ef856477bf6f4fb29ba1b7af717770d/node /tmp/vscode-remote-containers-f6577d58ea4d6f55a5071d9d837f8196abfa5a7a.js $*; }; f' || true
+[2022-05-14T16:41:34.418Z] 
+[2022-05-14T16:41:34.418Z] 
+[2022-05-14T16:41:34.418Z] Stop (3 ms): Run in container: command -v git >/dev/null 2>&1 && git config --global --replace-all credential.helper '!f() { /root/.vscode-server/bin/da15b6fd3ef856477bf6f4fb29ba1b7af717770d/node /tmp/vscode-remote-containers-f6577d58ea4d6f55a5071d9d837f8196abfa5a7a.js $*; }; f' || true
+[2022-05-14T16:41:34.452Z] userEnvProbe PATHs:
+Probe:     '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+Container: '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+[2022-05-14T16:41:34.452Z] 
+
+--------------------
+Published Ports:
+80/tcp -> 0.0.0.0:80
+80/tcp -> :::80
+--------------------
+
+[2022-05-14T16:41:34.456Z] Stop (4178 ms): Resolving Remote
+[2022-05-14T16:41:34.481Z] Port forwarding connection from 55260 > 34823 > 34823 in the container.
+[2022-05-14T16:41:34.482Z] Start: Run in container: /root/.vscode-server/bin/da15b6fd3ef856477bf6f4fb29ba1b7af717770d/node -e 
+[2022-05-14T16:41:34.715Z] [16:41:34] Extension host agent started.
+[2022-05-14T16:41:34.729Z] Port forwarding 55260 > 34823 > 34823 stderr: Connection established
+[2022-05-14T16:41:34.919Z] Port forwarding connection from 55264 > 34823 > 34823 in the container.
+[2022-05-14T16:41:34.920Z] Start: Run in container: /root/.vscode-server/bin/da15b6fd3ef856477bf6f4fb29ba1b7af717770d/node -e 
+[2022-05-14T16:41:35.017Z] [16:41:35] [127.0.0.1][018d74c6][ManagementConnection] New connection established.
+[2022-05-14T16:41:35.095Z] Port forwarding 55264 > 34823 > 34823 stderr: Connection established
+[2022-05-14T16:41:35.532Z] [16:41:35] [127.0.0.1][226deb04][ExtensionHostConnection] New connection established.
+[2022-05-14T16:41:35.540Z] [16:41:35] [127.0.0.1][226deb04][ExtensionHostConnection] <311> Launched Extension Host Process.
+[2022-05-14T16:41:36.070Z] Port forwarding connection from 55268 > 34823 > 34823 in the container.
+[2022-05-14T16:41:36.070Z] Start: Run in container: /root/.vscode-server/bin/da15b6fd3ef856477bf6f4fb29ba1b7af717770d/node -e 
+[2022-05-14T16:41:36.219Z] Port forwarding connection from 55270 > 34823 > 34823 in the container.
+[2022-05-14T16:41:36.220Z] Start: Run in container: /root/.vscode-server/bin/da15b6fd3ef856477bf6f4fb29ba1b7af717770d/node -e 
+[2022-05-14T16:41:36.259Z] Port forwarding 55268 > 34823 > 34823 stderr: Connection established
+[2022-05-14T16:41:36.484Z] Port forwarding 55270 > 34823 > 34823 stderr: Connection established

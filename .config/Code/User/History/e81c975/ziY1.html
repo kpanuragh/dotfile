@@ -1,0 +1,99 @@
+<div class="row u-margin--top-ten u-margin--bottom-twenty">
+	<div class="col-md-12">
+		<form name="printForm" action="{{'<?=$LMSUri?>print/' + listAction.baseUrl}}" method="GET" target="_blank" class="pull-left u-margin--right-five" ng-if="!listAction.hidePrint">
+			<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-10">
+					<div class="row" ng-if="!invoice">
+						<div class="col-md-12">
+							<label>Define header details for the report.</label>
+						</div>
+						<div class="col-md-12">
+							<h5>Title:</h5>
+							<div class="form-group">
+								<input type="text" class="input-sm form-control" name="title" ng-model="listAction.print.title"/>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<h5>Description:</h5>
+							<div class="form-group">
+								<textarea ui-tinymce="tinymce.options" name="description" rows="5" ng-model="listAction.print.description"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<button type="button" class="btn btn-default" ng-click="enroleAnyLearner()" ng-disabled="!hasPermission()">
+								<span class="glyphicon" ng-class="listAction.print.send_to_manager ? 'glyphicon-check' : 'glyphicon-unchecked'"></span>
+								Send report to select managers
+							</button>
+						</div>
+					</div>
+					<div class="row" ng-if="!invoice">
+						<div class="col-xs-5">
+							<span ng-if="review.selected.id">
+								If you want to save this batch report and run it automatically enter the frequency in days at which it should be sent.
+							</span>
+						</div>
+						<div class="col-xs-5">
+							<span ng-if="review.selected.id">
+								<ng-include src="'<?=$LMSTplsUriHTML;?>email-frequency.html'"></ng-include>
+							</span>
+						</div>
+						<div class="col-xs-2">
+							<input type="hidden" name="tableState" ng-value="tableStateEncoded">
+							<button type="submit" class="btn btn-default pull-right" uib-tooltip="{{tableState.pagination.numberOfPages > 500 ? 'This report will have more than 500 pages, are you sure you wish to continue? Running reports with so much data may cause problems for the system. We suggest you change the filter to look at a smaller subset of data.' : ''}}" ng-click="listAction.print.saveReport()" ng-disabled="!listAction.print.title">
+								<span class="glyphicon glyphicon-print"></span>
+								Print
+							</button>
+						</div>
+					</div>
+					<div class="row" ng-if="invoice">
+						<div class="col-md-12">
+							<label>Define the invoice.</label>
+						</div>
+						<div class="col-md-12">
+							<h5>Invoice number:</h5>
+							<div class="form-group">
+								<input type="number" class="input-sm form-control" name="number" ng-model="listAction.invoice.number"/>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<h5>Invoice Date:</h5>
+							<div class="form-group">
+								<input type="date" class="input-sm form-control" name="date" ng-model="listAction.invoice.date"/>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<h5>Due Date:</h5>
+							<div class="form-group">
+								<input type="date" class="input-sm form-control" name="due_date" ng-model="listAction.invoice.due_date"/>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<h5>Terms:</h5>
+							<div class="form-group">
+								<input type="text" class="input-sm form-control" name="terms" ng-model="listAction.invoice.terms"/>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<h5>Notes for Invoice:</h5>
+							<div class="form-group">
+								<textarea ui-tinymce="tinymce.options" name="notes" rows="5" ng-model="listAction.invoice.notes"></textarea>
+							</div>
+						</div>
+						<div class="col-xs-12">
+							<input type="hidden" name="tableState" ng-value="tableStateEncoded">
+							<button type="submit" class="btn btn-default pull-right" ng-click="listAction.print.saveReport(true)">
+								<span class="glyphicon glyphicon-print"></span>
+								Print
+							</button>
+						</div>
+						<input type="hidden" class="input-sm form-control" name="company_id" ng-model="additionalSearchParams.users__company_id"/>
+					</div>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+		</form>
+	</div>
+</div>

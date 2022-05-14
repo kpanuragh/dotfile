@@ -1,0 +1,4 @@
+[2022-05-13 06:00:51.755] [GIT  ] [/home/cubet/backup/cubetBackup/oelms9] git log --format=%x3cr%x3e%x20%H -n3 -m -L 172,172:src/tpls/html/print-form.html • Command failed: /usr/bin/git -c core.quotepath=false -c color.ui=false -c log.showSignature=false log --format=%x3cr%x3e%x20%H -n3 -m -L 172,172:src/tpls/html/print-form.html • file src/tpls/html/print-form.html has only 91 lines • 7 ms
+
+[2022-05-13 06:01:05.852] [GIT  ] [/home/cubet/backup/cubetBackup/oelms9] git log --format=%x3cr%x3e%x20%H -n3 -m -L 169,169:src/tpls/html/print-form.html • Command failed: /usr/bin/git -c core.quotepath=false -c color.ui=false -c log.showSignature=false log --format=%x3cr%x3e%x20%H -n3 -m -L 169,169:src/tpls/html/print-form.html • file src/tpls/html/print-form.html has only 91 lines • 10 ms
+

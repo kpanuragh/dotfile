@@ -1,0 +1,18 @@
+version: "2"
+services:
+  web:
+    build: .
+    volumes:
+      - ./:/app
+    ports:
+      - 3000:3000
+    links:
+      - mongodb
+  mongodb:
+    image: docker.io/bitnami/mongodb:5.0
+    user: "cubet"
+    container_name: mongodb
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "27017:27017"

@@ -1,0 +1,8 @@
+[2022-05-13 10:57:19.516] [sharedprocess] [info] Starting worker process with pid 15410 (type: fileWatcher, window: 1).
+[2022-05-13 12:38:17.701] [sharedprocess] [info] Getting Manifest... pnp.polacode
+[2022-05-13 12:38:17.705] [sharedprocess] [info] Installing extension: pnp.polacode
+[2022-05-13 12:38:19.640] [sharedprocess] [info] Downloaded extension: pnp.polacode /home/cubet/.config/Code/CachedExtensionVSIXs/pnp.polacode-0.3.4
+[2022-05-13 12:38:19.666] [sharedprocess] [info] Extracted extension to /home/cubet/.vscode/extensions/.7773fc2c-3f6e-427b-9005-5a898bae2de8: pnp.polacode
+[2022-05-13 12:38:19.668] [sharedprocess] [info] Renamed to /home/cubet/.vscode/extensions/pnp.polacode-0.3.4
+[2022-05-13 12:38:19.670] [sharedprocess] [info] Extracting completed. pnp.polacode
+[2022-05-13 12:38:19.671] [sharedprocess] [info] Extension installed successfully: pnp.polacode

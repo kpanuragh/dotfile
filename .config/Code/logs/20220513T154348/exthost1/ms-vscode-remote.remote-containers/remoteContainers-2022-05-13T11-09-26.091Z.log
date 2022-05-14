@@ -1,0 +1,124 @@
+[2022-05-13T11:09:26.143Z] Remote-Containers 0.234.0 in VS Code 1.67.0 (57fd6d0195bb9b9d1b49f6da5db789060795de47).
+[2022-05-13T11:09:26.143Z] Start: Resolving Remote
+[2022-05-13T11:09:26.150Z] Setting up container for folder or workspace: /home/cubet/backup/cubetBackup/oelms9
+[2022-05-13T11:09:26.157Z] Start: Check Docker is running
+[2022-05-13T11:09:26.158Z] Start: Run: docker version --format {{.Server.APIVersion}}
+[2022-05-13T11:09:26.190Z] Stop (32 ms): Run: docker version --format {{.Server.APIVersion}}
+[2022-05-13T11:09:26.190Z] Server API version: 1.41
+[2022-05-13T11:09:26.191Z] Stop (34 ms): Check Docker is running
+[2022-05-13T11:09:26.191Z] Start: Run: docker volume ls -q
+[2022-05-13T11:09:26.219Z] Stop (28 ms): Run: docker volume ls -q
+[2022-05-13T11:09:26.226Z] Start: Run: /usr/share/code/code /home/cubet/.vscode/extensions/ms-vscode-remote.remote-containers-0.234.0/dist/spec-node/devContainersSpecCLI.js up --user-data-folder /home/cubet/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/data --container-data-folder .vscode-server/data/Machine --container-system-data-folder /var/vscode-server --workspace-folder /home/cubet/backup/cubetBackup/oelms9 --workspace-mount-consistency cached --id-label vsch.local.folder=/home/cubet/backup/cubetBackup/oelms9 --id-label vsch.quality=stable --log-level debug --log-format json --config /home/cubet/backup/cubetBackup/oelms9/.devcontainer/devcontainer.json --default-user-env-probe loginInteractiveShell --remove-existing-container --mount type=volume,source=vscode,target=/vscode,external=true --skip-post-create --update-remote-user-uid-default on --mount-workspace-git-root true
+[2022-05-13T11:09:26.403Z] remote-containers 0.234.0.
+[2022-05-13T11:09:26.403Z] Start: Resolving Remote
+[2022-05-13T11:09:26.407Z] Start: Run: docker-compose version --short
+[2022-05-13T11:09:26.634Z] Stop (227 ms): Run: docker-compose version --short
+[2022-05-13T11:09:26.635Z] Start: Run: docker ps -q -a --filter label=com.docker.compose.project=docker --filter label=com.docker.compose.service=oelms-app
+[2022-05-13T11:09:26.661Z] Stop (26 ms): Run: docker ps -q -a --filter label=com.docker.compose.project=docker --filter label=com.docker.compose.service=oelms-app
+[2022-05-13T11:09:26.662Z] Start: Run: docker inspect --type container 10c48d9e4751
+[2022-05-13T11:09:26.688Z] Stop (26 ms): Run: docker inspect --type container 10c48d9e4751
+[2022-05-13T11:09:26.689Z] Start: Removing existing container.
+[2022-05-13T11:09:26.689Z] Start: Run: docker rm -f 10c48d9e4751c85302d35287d188c63a26be4c15a1ed6d6e58a8f5ede7f4e840
+[2022-05-13T11:09:27.060Z] Stop (371 ms): Run: docker rm -f 10c48d9e4751c85302d35287d188c63a26be4c15a1ed6d6e58a8f5ede7f4e840
+[2022-05-13T11:09:27.060Z] Stop (371 ms): Removing existing container.
+[2022-05-13T11:09:27.061Z] Start: Run: docker-compose -f /home/cubet/backup/cubetBackup/oelms9/docker/docker-compose.yml config
+[2022-05-13T11:09:27.348Z] Stop (287 ms): Run: docker-compose -f /home/cubet/backup/cubetBackup/oelms9/docker/docker-compose.yml config
+[2022-05-13T11:09:27.348Z] networks:
+  laravel-oelms:
+    driver: bridge
+services:
+  mailhog:
+    container_name: oelms-mail
+    image: mailhog/mailhog
+    logging:
+      driver: none
+    networks:
+      laravel-oelms: null
+    ports:
+    - published: 1025
+      target: 1025
+    - published: 8025
+      target: 8025
+  mysql:
+    command: mysqld --sql_mode="NO_ENGINE_SUBSTITUTION"
+    container_name: oelms-laravel-db
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: openelms_dev
+      MYSQL_PASSWORD: dev
+      MYSQL_ROOT_PASSWORD: dev
+      MYSQL_USER: dev
+    image: mariadb:10.3.32
+    networks:
+      laravel-oelms: null
+    ports:
+    - published: 3306
+      target: 3306
+    restart: unless-stopped
+    volumes:
+    - /home/cubet/backup/cubetBackup/oelms9/docker/database/dbdata:/var/lib/mysql:rw
+  oelms-app:
+    build:
+      context: /home/cubet/backup/cubetBackup/oelms9/docker
+      dockerfile: ./Dockerfile
+    container_name: oelms-app
+    depends_on:
+      mysql:
+        condition: service_started
+    environment:
+      XDEBUG_CONFIG: remote_host=172.17.0.1
+    extra_hosts:
+    - openlms.local.com:127.0.0.1
+    image: laravel_apache
+    networks:
+      laravel-oelms: null
+    ports:
+    - published: 80
+      target: 80
+    user: root
+    volumes:
+    - /home/cubet/backup/cubetBackup/oelms9:/var/www/html:rw
+    - /home/cubet/backup/cubetBackup/oelms9/docker/config/logs:/var/log/cron:rw
+    - /home/cubet/backup/cubetBackup/oelms9/docker/tmp:/tmp:rw
+  phpmyadmin:
+    container_name: oelms-phpmyadmin
+    environment:
+      MYSQL_PASSWORD: dev
+      MYSQL_ROOT_PASSWORD: dev
+      MYSQL_USER: dev
+      PMA_HOST: oelms-laravel-db
+      UPLOAD_LIMIT: 700M
+    image: phpmyadmin/phpmyadmin
+    links:
+    - mysql
+    networks:
+      laravel-oelms: null
+    ports:
+    - published: 8000
+      target: 80
+version: '3.7'
+
+[2022-05-13T11:09:27.356Z] Start: Run: docker -v
+[2022-05-13T11:09:27.400Z] Stop (44 ms): Run: docker -v
+[2022-05-13T11:09:27.400Z] Start: Run: docker events --format {{json .}} --filter event=start
+[2022-05-13T11:09:27.406Z] Start: Run: docker-compose --project-name docker -f /home/cubet/backup/cubetBackup/oelms9/docker/docker-compose.yml build
+[2022-05-13T11:09:27.714Z] mysql uses an image, skipping
+mailhog uses an image, skipping
+[2022-05-13T11:09:27.715Z] phpmyadmin uses an image, skipping
+Building oelms-app
+[2022-05-13T11:09:27.780Z] error checking context: 'no permission to read from '/home/cubet/backup/cubetBackup/oelms9/docker/tmp/sess_1ef8ad41bfa6d109926076f4112f0066''.
+[2022-05-13T11:09:27.784Z] ERROR: Service 'oelms-app' failed to build : Build failed
+[2022-05-13T11:09:27.824Z] Stop (418 ms): Run: docker-compose --project-name docker -f /home/cubet/backup/cubetBackup/oelms9/docker/docker-compose.yml build
+[2022-05-13T11:09:27.825Z] Error: Command failed: docker-compose --project-name docker -f /home/cubet/backup/cubetBackup/oelms9/docker/docker-compose.yml build
+[2022-05-13T11:09:27.826Z]     at Lu (/home/cubet/.vscode/extensions/ms-vscode-remote.remote-containers-0.234.0/dist/spec-node/devContainersSpecCLI.js:186:227)
+[2022-05-13T11:09:27.826Z]     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[2022-05-13T11:09:27.826Z]     at async CR (/home/cubet/.vscode/extensions/ms-vscode-remote.remote-containers-0.234.0/dist/spec-node/devContainersSpecCLI.js:186:1007)
+[2022-05-13T11:09:27.826Z]     at async ER (/home/cubet/.vscode/extensions/ms-vscode-remote.remote-containers-0.234.0/dist/spec-node/devContainersSpecCLI.js:183:2075)
+[2022-05-13T11:09:27.826Z]     at async $R (/home/cubet/.vscode/extensions/ms-vscode-remote.remote-containers-0.234.0/dist/spec-node/devContainersSpecCLI.js:226:2178)
+[2022-05-13T11:09:27.826Z]     at async Zy (/home/cubet/.vscode/extensions/ms-vscode-remote.remote-containers-0.234.0/dist/spec-node/devContainersSpecCLI.js:226:3112)
+[2022-05-13T11:09:27.827Z]     at async BR (/home/cubet/.vscode/extensions/ms-vscode-remote.remote-containers-0.234.0/dist/spec-node/devContainersSpecCLI.js:226:12448)
+[2022-05-13T11:09:27.827Z]     at async qR (/home/cubet/.vscode/extensions/ms-vscode-remote.remote-containers-0.234.0/dist/spec-node/devContainersSpecCLI.js:226:12204)
+[2022-05-13T11:09:27.830Z] Stop (1604 ms): Run: /usr/share/code/code /home/cubet/.vscode/extensions/ms-vscode-remote.remote-containers-0.234.0/dist/spec-node/devContainersSpecCLI.js up --user-data-folder /home/cubet/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/data --container-data-folder .vscode-server/data/Machine --container-system-data-folder /var/vscode-server --workspace-folder /home/cubet/backup/cubetBackup/oelms9 --workspace-mount-consistency cached --id-label vsch.local.folder=/home/cubet/backup/cubetBackup/oelms9 --id-label vsch.quality=stable --log-level debug --log-format json --config /home/cubet/backup/cubetBackup/oelms9/.devcontainer/devcontainer.json --default-user-env-probe loginInteractiveShell --remove-existing-container --mount type=volume,source=vscode,target=/vscode,external=true --skip-post-create --update-remote-user-uid-default on --mount-workspace-git-root true
+[2022-05-13T11:09:27.830Z] Exit code 1
+[2022-05-13T11:09:27.834Z] Command failed: /usr/share/code/code /home/cubet/.vscode/extensions/ms-vscode-remote.remote-containers-0.234.0/dist/spec-node/devContainersSpecCLI.js up --user-data-folder /home/cubet/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/data --container-data-folder .vscode-server/data/Machine --container-system-data-folder /var/vscode-server --workspace-folder /home/cubet/backup/cubetBackup/oelms9 --workspace-mount-consistency cached --id-label vsch.local.folder=/home/cubet/backup/cubetBackup/oelms9 --id-label vsch.quality=stable --log-level debug --log-format json --config /home/cubet/backup/cubetBackup/oelms9/.devcontainer/devcontainer.json --default-user-env-probe loginInteractiveShell --remove-existing-container --mount type=volume,source=vscode,target=/vscode,external=true --skip-post-create --update-remote-user-uid-default on --mount-workspace-git-root true
+[2022-05-13T11:09:27.835Z] Exit code 1

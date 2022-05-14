@@ -1,0 +1,5 @@
+# create a file named Dockerfile
+FROM node:argonRUN 
+mkdir /app
+WORKDIR /appCOPY package.json /app
+RUN npm installCOPY . /appEXPOSE 3000CMD ["npm", "start"]

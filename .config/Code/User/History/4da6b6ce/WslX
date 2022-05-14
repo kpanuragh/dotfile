@@ -1,0 +1,60 @@
+FROM php:7.1-apache
+
+USER root
+
+WORKDIR /var/www/html
+
+RUN apt update && apt install -y \
+        libpng-dev \
+        zlib1g-dev \
+        libxml2-dev \
+        libzip-dev \
+        libonig-dev \
+        zip \
+        curl \
+        unzip \
+        tzdata \
+        nano \
+        git \
+    && docker-php-ext-configure gd \
+    && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-install pdo_mysql \
+    && docker-php-ext-install mysqli \
+    && docker-php-ext-install zip \
+    && docker-php-ext-install opcache \
+    && docker-php-source delete
+RUN apt-get -y install rsyslog
+RUN apt-get update && \
+    apt-get -y install tzdata cron
+RUN cp /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && \
+    echo "Asia/Kolkata" > /etc/timezone
+RUN rm -rf /var/cache/apk/*
+RUN mkdir /var/jobs
+COPY config/jobs /var/jobs/
+RUN chmod 777 -R /var/jobs
+COPY config/cron /etc/cron.d/cron
+RUN chmod 0644 /etc/cron.d/cron
+RUN crontab /etc/cron.d/cron
+RUN mkdir -p /var/log/cron
+COPY config/vhost.conf /etc/apache2/sites-available/000-default.conf
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN composer global require symfony/var-dumper
+RUN pecl install xdebug-2.9.0 
+RUN docker-php-ext-enable xdebug
+COPY config/custom.ini /usr/local/etc/php/conf.d/custom.ini
+RUN chown -R www-data:www-data /root
+RUN chmod -R g+rwX /root
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+SHELL ["/bin/bash", "--login", "-c"]
+RUN curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
+RUN bash  /tmp/nodesource_setup.sh
+RUN apt install -y nodejs npm
+RUN npm install -g nodemon
+RUN npm install -g pm2
+RUN chown -R www-data:www-data /var/www/html && a2enmod rewrite
+RUN sed -i 's/^exec /service cron start\n\nexec /' /usr/local/bin/apache2-foreground
+RUN sed -i '$s/^/cd \/var\/www\/html\/\n/' /usr/local/bin/apache2-foreground
+RUN sed -i '$s/^/pm2 start src\/crons\/combine.php --interpreter php --watch --ignore-watch src\/public --no-autorestart\n/' /usr/local/bin/apache2-foreground
+RUN sed -i '$s/^/pm2 start src\/crons\/cron-tasks.php --interpreter php --cron-restart="0 * * * *" --no-autorestart\n/' /usr/local/bin/apache2-foreground
+RUN sed -i '$s/^/pm2 start src\/crons\/process_mail_queue.php  --interpreter php --cron-restart="0 * * * *" --no-autorestart\n/' /usr/local/bin/apache2-foreground

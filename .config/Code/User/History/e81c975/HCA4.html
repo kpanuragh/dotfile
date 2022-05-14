@@ -1,0 +1,311 @@
+<div class="row u-margin--top-ten u-margin--bottom-twenty">
+	<div class="col-md-12">
+		<form name="printForm" action="{{'<?=$LMSUri?>print/' + listAction.baseUrl}}" method="GET" target="_blank"
+			class="pull-left u-margin--right-five" ng-if="!listAction.hidePrint">
+			<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-10">
+					<div class="row" ng-if="!invoice">
+						<div class="col-md-12">
+							<label>Define header details for the report.</label>
+						</div>
+						<div class="col-md-12">
+							<h5>Title:</h5>
+							<div class="form-group">
+								<input type="text" class="input-sm form-control" name="title"
+									ng-model="listAction.print.title" />
+							</div>
+						</div>
+						<div class="col-md-12">
+							<h5>Description:</h5>
+							<div class="form-group">
+								<textarea ui-tinymce="tinymce.options" name="description" rows="5"
+									ng-model="listAction.print.description"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<button type="button" class="btn btn-default" ng-click="listAction.sendToManager()">
+								<span class="glyphicon"
+									ng-class="listAction.send_to_manager ? 'glyphicon-check' : 'glyphicon-unchecked'"></span>
+								Send report to select managers
+							</button>
+						</div>
+					</div>
+					<div class="row"
+						ng-if="listAction.send_to_manager">
+						<div class="col-xs-12">
+							<div class="well u-position--relative">
+								<button
+									class="btn btn-warning u-position--absolute u-position--top-left-three btn-xs u-z-index--one"
+									ng-click="listAction.sendToManager(false)">
+									<span class="glyphicon glyphicon-resize-small"></span>
+									Close
+								</button>
+								<div class="form-group" ng-if="listAction.send_to_manager">
+									<div class="col-xs-12">
+										<div class="x_title">
+											<h4>Add/Remove %%managers%%</h4>
+											<div class="clearfix"></div>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<table st-pipe="callServer" st-table="link.selected.all"
+											class="table table-striped report st-selectable">
+											<thead>
+												<tr>
+													<th st-sort="id">ID</th>
+
+													<th st-sort="username">
+														Username</th>
+													<th st-sort="fname">
+														First Name</th>
+													<th st-sort="lname">
+														Last Name</th>
+													<th st-sort="email">
+														Email</th>
+													<th st-sort="phone">
+														Phone</th>
+													<th st-sort="company_id">
+														%%company%%</th>
+													<th st-sort="role_id">
+														Role</th>
+												</tr>
+												<tr>
+													<th>
+														<input st-search="id" placeholder="id"
+															class="input-sm form-control" type="number" />
+													</th>
+
+													<th
+														>
+														<input st-search="username" placeholder="user name"
+															class="input-sm form-control" type="search" />
+													</th>
+													<th
+														>
+														<input st-search="fname" placeholder="first name"
+															class="input-sm form-control" type="search" />
+													</th>
+													<th
+														>
+														<input st-search="lname" placeholder="last name"
+															class="input-sm form-control" type="search" />
+													</th>
+													<th
+														>
+														<input st-search="email" placeholder="email"
+															class="input-sm form-control" type="search" />
+													</th>
+													<th>
+														<input st-search="phone" placeholder="phone"
+															class="input-sm form-control" type="search" />
+													</th>
+													<th
+														>
+														<select st-search="company_id" class="input-sm form-control"
+															st-input-event="change">
+															<option value=""></option>
+															<option ng-repeat="c in companies | orderBy : 'name'"
+																value="{{c.id}}">{{c.name}}</option>
+														</select>
+													</th>
+
+													<th
+														>
+														<select st-search="role_id" class="input-sm form-control"
+															st-input-event="change">
+															<option value=""></option>
+															<option ng-repeat="r in roles | orderBy : 'name'"
+																value="{{r.id}}">{{r.name}}</option>
+														</select>
+													</th>
+													<th>
+														<select st-search="added" class="input-sm form-control"
+															st-input-event="change">
+															<option value=""></option>
+															<option value="1">Added</option>
+															<option value="0">Not added</option>
+														</select>
+														<!-- <input search-watch-model="link.selected.status"
+															st-search="status" type="hidden" />
+														<input search-watch-model="link.refreshTable"
+															st-search="refresh" type="hidden" />
+														<input search-watch-model="event.id" st-search="schedule_id"
+															type="hidden" />
+														<input search-watch-model="link.selected.relationship"
+															st-search="relationship" type="hidden" /> -->
+													</th>
+												</tr>
+											</thead>
+											<tbody ng-show="!listAction.isLoading">
+												<tr st-select-row="entry" st-select-mode="multiple"
+													ng-repeat="entry in listAction.selected.all"
+													ng-class="{'u-disabled': entry.updating}">
+													<td>
+														{{entry.id}}
+													</td>
+
+													<td
+														ng-if="link.selected.slug == 'users' || link.selected.slug == 'managers'">
+														{{entry.username}}
+													</td>
+													<td
+														ng-if="link.selected.slug == 'users' || link.selected.slug == 'managers'">
+														{{entry.fname}}
+													</td>
+													<td
+														ng-if="link.selected.slug == 'users' || link.selected.slug == 'managers'">
+														{{entry.lname}}
+													</td>
+													<td
+														ng-if="link.selected.slug == 'users' || link.selected.slug == 'managers'">
+														{{entry.email}}
+													</td>
+													<td
+														ng-if="config.IncludeCredasForms && link.selected.slug == 'users'">
+														{{entry.form_progress}}
+													</td>
+													<td
+														ng-if="link.selected.slug == 'users' || link.selected.slug == 'managers'">
+														{{entry.phone}}
+													</td>
+													<td
+														ng-if="link.selected.slug == 'resources' || link.selected.slug == 'programmes' || link.selected.slug == 'departments' || link.selected.slug == 'groups' || link.selected.slug == 'schedules'">
+														{{entry.name}}
+													</td>
+													<td ng-if="link.selected.slug == 'schedules'">
+														{{entry.start_date | dateToISO |date:'dd/MM/yyyy HH:mm'}}
+													</td>
+													<td
+														ng-if="link.selected.slug == 'resources' || link.selected.slug == 'programmes'">
+														{{entry.category.name}}
+													</td>
+													<td ng-if="link.selected.slug == 'resources'">
+														{{entry.type.name}}
+													</td>
+													<td
+														ng-if="link.selected.slug == 'resources' || link.selected.slug == 'users' || link.selected.slug == 'departments' || link.selected.slug == 'managers'">
+														<span ng-if="entry.company == null">All</span>
+														{{entry.company.name}}
+													</td>
+
+													<td
+														ng-if="link.selected.slug == 'users' || link.selected.slug == 'managers'">
+														{{entry.role.name}}
+													</td>
+
+													<td ng-if="link.selected.slug == 'resources'">
+														{{entry.createdby.fname}} {{entry.createdby.lname}}
+													</td>
+													<td nowrap>
+														{{entry.updating ? 'Updating' : entry.isSelected ? 'Added' :
+														'Not added'}}
+													</td>
+												</tr>
+											</tbody>
+											<tbody ng-show="isLoading">
+												<tr>
+													<td colspan="15" class="text-center" loading-bar>Loading ... </td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr>
+													<td colspan="15" class="text-center">
+														<div st-items-by-page="10" st-pagination=""
+															st-template="<?=$LMSTplsUriHTML?>pagination.html"></div>
+													</td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+								</div>
+
+
+								<div class="form-group" ng-if="link.selected.slug == 'files'">
+									<div class="col-xs-12">
+										<ng-include src="'<?=$LMSTplsUriHTML;?>attach-file.html'"></ng-include>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row" ng-if="!invoice">
+						<div class="col-xs-5">
+							<span ng-if="review.selected.id">
+								If you want to save this batch report and run it automatically enter the frequency in
+								days at which it should be sent.
+							</span>
+						</div>
+						<div class="col-xs-5">
+							<span ng-if="review.selected.id">
+								<ng-include src="'<?=$LMSTplsUriHTML;?>email-frequency.html'"></ng-include>
+							</span>
+						</div>
+						<div class="col-xs-2">
+							<input type="hidden" name="tableState" ng-value="tableStateEncoded">
+							<button type="submit" class="btn btn-default pull-right"
+								uib-tooltip="{{tableState.pagination.numberOfPages > 500 ? 'This report will have more than 500 pages, are you sure you wish to continue? Running reports with so much data may cause problems for the system. We suggest you change the filter to look at a smaller subset of data.' : ''}}"
+								ng-click="listAction.print.saveReport()" ng-disabled="!listAction.print.title">
+								<span class="glyphicon glyphicon-print"></span>
+								Print
+							</button>
+						</div>
+					</div>
+					<div class="row" ng-if="invoice">
+						<div class="col-md-12">
+							<label>Define the invoice.</label>
+						</div>
+						<div class="col-md-12">
+							<h5>Invoice number:</h5>
+							<div class="form-group">
+								<input type="number" class="input-sm form-control" name="number"
+									ng-model="listAction.invoice.number" />
+							</div>
+						</div>
+						<div class="col-md-12">
+							<h5>Invoice Date:</h5>
+							<div class="form-group">
+								<input type="date" class="input-sm form-control" name="date"
+									ng-model="listAction.invoice.date" />
+							</div>
+						</div>
+						<div class="col-md-12">
+							<h5>Due Date:</h5>
+							<div class="form-group">
+								<input type="date" class="input-sm form-control" name="due_date"
+									ng-model="listAction.invoice.due_date" />
+							</div>
+						</div>
+						<div class="col-md-12">
+							<h5>Terms:</h5>
+							<div class="form-group">
+								<input type="text" class="input-sm form-control" name="terms"
+									ng-model="listAction.invoice.terms" />
+							</div>
+						</div>
+						<div class="col-md-12">
+							<h5>Notes for Invoice:</h5>
+							<div class="form-group">
+								<textarea ui-tinymce="tinymce.options" name="notes" rows="5"
+									ng-model="listAction.invoice.notes"></textarea>
+							</div>
+						</div>
+						<div class="col-xs-12">
+							<input type="hidden" name="tableState" ng-value="tableStateEncoded">
+							<button type="submit" class="btn btn-default pull-right"
+								ng-click="listAction.print.saveReport(true)">
+								<span class="glyphicon glyphicon-print"></span>
+								Print
+							</button>
+						</div>
+						<input type="hidden" class="input-sm form-control" name="company_id"
+							ng-model="additionalSearchParams.users__company_id" />
+					</div>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+		</form>
+	</div>
+</div>

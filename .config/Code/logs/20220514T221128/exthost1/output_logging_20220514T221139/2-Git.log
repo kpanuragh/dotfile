@@ -1,0 +1,20 @@
+[2022-05-14T16:41:40.664Z] Validating found git in: git
+[2022-05-14T16:41:40.738Z] Using git 2.34.1 from git
+[2022-05-14T16:41:40.760Z] > git rev-parse --show-toplevel [11ms]
+[2022-05-14T16:41:41.297Z] > git rev-parse --git-dir --git-common-dir [520ms]
+[2022-05-14T16:41:41.311Z] Open repository: /home/cubet/backup/cubetBackup/oelms9
+[2022-05-14T16:41:42.393Z] > git status -z -uall [1065ms]
+[2022-05-14T16:41:42.477Z] > git check-ignore -v -z --stdin [164ms]
+[2022-05-14T16:41:42.479Z] > git symbolic-ref --short HEAD [38ms]
+[2022-05-14T16:41:42.611Z] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/SCOR-2597-suffolk-can-we-not-send-this-r refs/remotes/SCOR-2597-suffolk-can-we-not-send-this-r [121ms]
+[2022-05-14T16:41:42.636Z] > git remote --verbose [2ms]
+[2022-05-14T16:41:44.984Z] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [2364ms]
+[2022-05-14T16:41:44.996Z] > git config --get commit.template [1ms]
+[2022-05-14T16:41:45.495Z] > git rev-parse --show-toplevel [1ms]
+[2022-05-14T16:41:48.542Z] > git status -z -uall [34ms]
+[2022-05-14T16:41:48.546Z] > git symbolic-ref --short HEAD [1ms]
+[2022-05-14T16:41:48.550Z] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/SCOR-2597-suffolk-can-we-not-send-this-r refs/remotes/SCOR-2597-suffolk-can-we-not-send-this-r [1ms]
+[2022-05-14T16:41:48.557Z] > git remote --verbose [0ms]
+[2022-05-14T16:41:48.561Z] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [7ms]
+[2022-05-14T16:41:48.570Z] > git config --get commit.template [1ms]
+[2022-05-14T16:41:49.071Z] > git rev-parse --show-toplevel [1ms]

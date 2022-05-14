@@ -1,0 +1,214 @@
+[2022-05-14T18:24:18.958Z] Validating found git in: git
+[2022-05-14T18:24:18.996Z] Using git 2.34.1 from git
+[2022-05-14T18:24:19.007Z] > git rev-parse --show-toplevel [3ms]
+[2022-05-14T18:24:19.007Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.014Z] > git rev-parse --show-toplevel [0ms]
+[2022-05-14T18:24:19.014Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.018Z] > git rev-parse --show-toplevel [1ms]
+[2022-05-14T18:24:19.018Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.023Z] > git rev-parse --show-toplevel [2ms]
+[2022-05-14T18:24:19.185Z] > git rev-parse --git-dir --git-common-dir [158ms]
+[2022-05-14T18:24:19.188Z] Open repository: /home/cubet/.cfg
+[2022-05-14T18:24:19.197Z] > git status -z -uall [5ms]
+[2022-05-14T18:24:19.201Z] > git rev-parse --show-toplevel [6ms]
+[2022-05-14T18:24:19.201Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.219Z] > git rev-parse --show-toplevel [15ms]
+[2022-05-14T18:24:19.219Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.222Z] > git symbolic-ref --short HEAD [22ms]
+[2022-05-14T18:24:19.227Z] > git rev-parse --show-toplevel [5ms]
+[2022-05-14T18:24:19.227Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.233Z] > git rev-parse --show-toplevel [3ms]
+[2022-05-14T18:24:19.233Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.237Z] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [12ms]
+[2022-05-14T18:24:19.269Z] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [28ms]
+[2022-05-14T18:24:19.270Z] > git rev-parse --show-toplevel [33ms]
+[2022-05-14T18:24:19.270Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.285Z] > git rev-parse --show-toplevel [12ms]
+[2022-05-14T18:24:19.285Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.289Z] > git remote --verbose [44ms]
+[2022-05-14T18:24:19.297Z] > git rev-parse --show-toplevel [9ms]
+[2022-05-14T18:24:19.297Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.323Z] > git config --get commit.template [27ms]
+[2022-05-14T18:24:19.348Z] > git rev-parse --show-toplevel [48ms]
+[2022-05-14T18:24:19.360Z] > git rev-parse --git-dir --git-common-dir [8ms]
+[2022-05-14T18:24:19.364Z] Open repository: /home/cubet/.nvm
+[2022-05-14T18:24:19.378Z] > git rev-parse --show-toplevel [4ms]
+[2022-05-14T18:24:19.384Z] > git rev-parse --git-dir --git-common-dir [1ms]
+[2022-05-14T18:24:19.387Z] Open repository: /home/cubet/.oh-my-zsh
+[2022-05-14T18:24:19.399Z] > git rev-parse --show-toplevel [1ms]
+[2022-05-14T18:24:19.399Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.442Z] > git status -z -uall [72ms]
+[2022-05-14T18:24:19.448Z] > git rev-parse --show-toplevel [44ms]
+[2022-05-14T18:24:19.448Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.458Z] > git symbolic-ref --short HEAD [9ms]
+[2022-05-14T18:24:19.458Z] fatal: ref HEAD is not a symbolic ref
+[2022-05-14T18:24:19.466Z] > git rev-parse HEAD [2ms]
+[2022-05-14T18:24:19.476Z] > git rev-parse --show-toplevel [20ms]
+[2022-05-14T18:24:19.476Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.485Z] > git remote --verbose [10ms]
+[2022-05-14T18:24:19.485Z] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [14ms]
+[2022-05-14T18:24:19.509Z] > git rev-parse --show-toplevel [28ms]
+[2022-05-14T18:24:19.509Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.515Z] > git config --get commit.template [7ms]
+[2022-05-14T18:24:19.525Z] > git rev-parse --show-toplevel [11ms]
+[2022-05-14T18:24:19.525Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.532Z] > git rev-parse --show-toplevel [2ms]
+[2022-05-14T18:24:19.532Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.537Z] > git rev-parse --show-toplevel [0ms]
+[2022-05-14T18:24:19.537Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.543Z] > git rev-parse --show-toplevel [1ms]
+[2022-05-14T18:24:19.543Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.566Z] > git rev-parse --show-toplevel [18ms]
+[2022-05-14T18:24:19.566Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.580Z] > git rev-parse --show-toplevel [10ms]
+[2022-05-14T18:24:19.580Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.585Z] > git rev-parse --show-toplevel [1ms]
+[2022-05-14T18:24:19.585Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.596Z] > git rev-parse --show-toplevel [7ms]
+[2022-05-14T18:24:19.596Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.624Z] > git rev-parse --show-toplevel [24ms]
+[2022-05-14T18:24:19.624Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.630Z] > git rev-parse --show-toplevel [2ms]
+[2022-05-14T18:24:19.630Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.640Z] > git rev-parse --show-toplevel [6ms]
+[2022-05-14T18:24:19.640Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.648Z] > git rev-parse --show-toplevel [5ms]
+[2022-05-14T18:24:19.648Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.657Z] > git rev-parse --show-toplevel [5ms]
+[2022-05-14T18:24:19.657Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.662Z] > git rev-parse --show-toplevel [1ms]
+[2022-05-14T18:24:19.662Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.667Z] > git rev-parse --show-toplevel [1ms]
+[2022-05-14T18:24:19.667Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.673Z] > git rev-parse --show-toplevel [1ms]
+[2022-05-14T18:24:19.673Z] fatal: not a git repository (or any parent up to mount point /home/cubet)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.678Z] > git rev-parse --show-toplevel [1ms]
+[2022-05-14T18:24:19.678Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.684Z] > git rev-parse --show-toplevel [0ms]
+[2022-05-14T18:24:19.684Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.688Z] > git rev-parse --show-toplevel [0ms]
+[2022-05-14T18:24:19.688Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:19.739Z] > git status -z -uall [347ms]
+[2022-05-14T18:24:19.743Z] > git symbolic-ref --short HEAD [1ms]
+[2022-05-14T18:24:19.747Z] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [1ms]
+[2022-05-14T18:24:19.758Z] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [7ms]
+[2022-05-14T18:24:19.758Z] > git remote --verbose [4ms]
+[2022-05-14T18:24:19.764Z] > git config --get commit.template [1ms]
+[2022-05-14T18:24:19.946Z] > git check-ignore -v -z --stdin [11ms]
+[2022-05-14T18:24:19.947Z] > git check-ignore -v -z --stdin [8ms]
+[2022-05-14T18:24:19.947Z] > git check-ignore -v -z --stdin [5ms]
+[2022-05-14T18:24:29.906Z] > git rev-parse --show-toplevel [14ms]
+[2022-05-14T18:24:29.906Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:29.911Z] > git rev-parse --show-toplevel [1ms]
+[2022-05-14T18:24:29.911Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:29.918Z] > git rev-parse --show-toplevel [2ms]
+[2022-05-14T18:24:29.918Z] fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2022-05-14T18:24:30.411Z] > git check-ignore -v -z --stdin [2ms]
+[2022-05-14T18:25:05.122Z] > git status -z -uall [3ms]
+[2022-05-14T18:25:05.129Z] > git symbolic-ref --short HEAD [1ms]
+[2022-05-14T18:25:05.134Z] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [1ms]
+[2022-05-14T18:25:05.140Z] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [4ms]
+[2022-05-14T18:25:05.140Z] > git remote --verbose [1ms]
+[2022-05-14T18:25:05.146Z] > git config --get commit.template [1ms]
+[2022-05-14T18:25:05.818Z] > git check-ignore -v -z --stdin [2ms]
+[2022-05-14T18:25:10.315Z] > git branch [1ms]
+[2022-05-14T18:25:10.319Z] > git rm --cached -r -- /home/cubet/.cfg/.bash_history [1ms]
+[2022-05-14T18:25:10.323Z] > git status -z -uall [1ms]
+[2022-05-14T18:25:10.328Z] > git symbolic-ref --short HEAD [2ms]
+[2022-05-14T18:25:10.332Z] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [1ms]
+[2022-05-14T18:25:10.339Z] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [3ms]
+[2022-05-14T18:25:10.339Z] > git remote --verbose [0ms]
+[2022-05-14T18:25:10.345Z] > git config --get commit.template [1ms]
+[2022-05-14T18:25:12.597Z] > git show --textconv HEAD:.bash_motd [16ms]
+[2022-05-14T18:25:12.597Z] > git show --textconv :.bash_motd [11ms]
+[2022-05-14T18:25:12.597Z] > git ls-tree -l HEAD -- /home/cubet/.cfg/.bash_motd [7ms]
+[2022-05-14T18:25:12.597Z] fatal: Not a valid object name HEAD
+[2022-05-14T18:25:12.599Z] > git ls-files --stage -- /home/cubet/.cfg/.bash_motd [4ms]
+[2022-05-14T18:25:12.604Z] > git cat-file -s 846cabbcc264cbb1411a5e3cadbbba00855af853 [1ms]
+[2022-05-14T18:25:13.104Z] > git check-ignore -v -z --stdin [2ms]
+[2022-05-14T18:25:14.103Z] > git show --textconv HEAD:.bash_profile [15ms]
+[2022-05-14T18:25:14.103Z] > git show --textconv :.bash_profile [10ms]
+[2022-05-14T18:25:14.103Z] > git ls-files --stage -- /home/cubet/.cfg/.bash_profile [2ms]
+[2022-05-14T18:25:14.106Z] > git ls-tree -l HEAD -- /home/cubet/.cfg/.bash_profile [8ms]
+[2022-05-14T18:25:14.106Z] fatal: Not a valid object name HEAD
+[2022-05-14T18:25:14.107Z] > git cat-file -s 846cabbcc264cbb1411a5e3cadbbba00855af853 [1ms]
+[2022-05-14T18:25:14.610Z] > git check-ignore -v -z --stdin [2ms]
+[2022-05-14T18:25:15.500Z] > git show --textconv HEAD:.bashrc [14ms]
+[2022-05-14T18:25:15.500Z] > git show --textconv :.bashrc [9ms]
+[2022-05-14T18:25:15.500Z] > git ls-files --stage -- /home/cubet/.cfg/.bashrc [2ms]
+[2022-05-14T18:25:15.503Z] > git ls-tree -l HEAD -- /home/cubet/.cfg/.bashrc [9ms]
+[2022-05-14T18:25:15.503Z] fatal: Not a valid object name HEAD
+[2022-05-14T18:25:15.504Z] > git cat-file -s 846cabbcc264cbb1411a5e3cadbbba00855af853 [1ms]
+[2022-05-14T18:25:16.007Z] > git check-ignore -v -z --stdin [2ms]
+[2022-05-14T18:25:16.648Z] > git show --textconv HEAD:.bash_logout [14ms]
+[2022-05-14T18:25:16.648Z] > git show --textconv :.bash_logout [9ms]
+[2022-05-14T18:25:16.648Z] > git ls-tree -l HEAD -- /home/cubet/.cfg/.bash_logout [5ms]
+[2022-05-14T18:25:16.648Z] fatal: Not a valid object name HEAD
+[2022-05-14T18:25:16.649Z] > git ls-files --stage -- /home/cubet/.cfg/.bash_logout [3ms]
+[2022-05-14T18:25:16.653Z] > git cat-file -s de4f5f75d7ccd3a5b62bd2ce683ed678a5cb72c2 [1ms]
+[2022-05-14T18:25:17.156Z] > git check-ignore -v -z --stdin [1ms]
+[2022-05-14T18:25:17.398Z] > git show --textconv HEAD:.bash_aliases [13ms]
+[2022-05-14T18:25:17.398Z] > git show --textconv :.bash_aliases [9ms]
+[2022-05-14T18:25:17.398Z] > git ls-tree -l HEAD -- /home/cubet/.cfg/.bash_aliases [5ms]
+[2022-05-14T18:25:17.398Z] fatal: Not a valid object name HEAD
+[2022-05-14T18:25:17.398Z] > git ls-files --stage -- /home/cubet/.cfg/.bash_aliases [2ms]
+[2022-05-14T18:25:17.403Z] > git cat-file -s 846cabbcc264cbb1411a5e3cadbbba00855af853 [1ms]
+[2022-05-14T18:25:17.905Z] > git check-ignore -v -z --stdin [1ms]
+[2022-05-14T18:27:54.097Z] > git ls-tree -l HEAD -- /home/cubet/.cfg/.bash_aliases [3ms]
+[2022-05-14T18:27:54.097Z] fatal: Not a valid object name HEAD
+[2022-05-14T18:27:54.099Z] > git ls-files --stage -- /home/cubet/.cfg/.bash_aliases [2ms]
+[2022-05-14T18:27:54.103Z] > git cat-file -s 846cabbcc264cbb1411a5e3cadbbba00855af853 [1ms]
+[2022-05-14T18:28:29.831Z] > git add -A -- . [7ms]
+[2022-05-14T18:28:29.853Z] > git -c user.useConfigOnly=true commit --quiet --allow-empty-message --file - --allow-empty [18ms]
+[2022-05-14T18:28:29.860Z] > git status -z -uall [4ms]
+[2022-05-14T18:28:29.868Z] > git symbolic-ref --short HEAD [1ms]
+[2022-05-14T18:28:29.868Z] fatal: ref HEAD is not a symbolic ref
+[2022-05-14T18:28:29.874Z] > git rev-parse HEAD [1ms]
+[2022-05-14T18:28:29.884Z] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [5ms]
+[2022-05-14T18:28:29.884Z] > git remote --verbose [1ms]
+[2022-05-14T18:28:29.890Z] > git config --get commit.template [1ms]
+[2022-05-14T18:28:29.896Z] > git config --get commit.template [2ms]
+[2022-05-14T18:42:02.533Z] > git ls-tree -l HEAD -- /home/cubet/.cfg/.bash_aliases [4ms]
+[2022-05-14T18:42:02.533Z] fatal: Not a valid object name HEAD
+[2022-05-14T18:42:02.534Z] > git ls-files --stage -- /home/cubet/.cfg/.bash_aliases [2ms]
+[2022-05-14T18:42:02.539Z] > git cat-file -s 846cabbcc264cbb1411a5e3cadbbba00855af853 [1ms]
+[2022-05-14T18:42:36.343Z] > git ls-tree -l HEAD -- /home/cubet/.cfg/.bash_aliases [5ms]
+[2022-05-14T18:42:36.343Z] fatal: Not a valid object name HEAD
+[2022-05-14T18:42:36.344Z] > git ls-files --stage -- /home/cubet/.cfg/.bash_aliases [2ms]
+[2022-05-14T18:42:36.348Z] > git cat-file -s 846cabbcc264cbb1411a5e3cadbbba00855af853 [1ms]

@@ -1,0 +1,13 @@
+[2022-05-14 22:11:28.694] [main] [info] window#load: attempt to load window (id: 1)
+[2022-05-14 22:11:28.705] [main] [info] update#setState idle
+[2022-05-14 22:11:28.765] [main] [info] ExtensionHostStarterWorker created
+[2022-05-14 22:11:29.725] [main] [info] window#load: window reported ready (id: 1)
+[2022-05-14 22:11:29.891] [main] [info] Starting extension host with pid 14192 (fork() took 8 ms).
+[2022-05-14 22:11:29.892] [main] [info] ExtensionHostStarterWorker.start() took 10 ms.
+[2022-05-14 22:11:37.469] [main] [info] window#load: attempt to load window (id: 1)
+[2022-05-14 22:11:37.499] [main] [info] Extension host with pid 14192 exited with code: 0, signal: null.
+[2022-05-14 22:11:38.135] [main] [info] window#load: window reported ready (id: 1)
+[2022-05-14 22:11:38.402] [main] [info] Starting extension host with pid 16306 (fork() took 9 ms).
+[2022-05-14 22:11:38.402] [main] [info] ExtensionHostStarterWorker.start() took 9 ms.
+[2022-05-14 22:11:58.710] [main] [info] update#setState checking for updates
+[2022-05-14 22:11:59.005] [main] [info] update#setState idle

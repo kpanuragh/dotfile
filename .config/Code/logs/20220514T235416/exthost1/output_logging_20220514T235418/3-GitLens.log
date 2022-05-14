@@ -1,0 +1,12 @@
+[2022-05-14 18:24:19.231] [GIT  ] [/home/cubet] git rev-parse --show-toplevel • Command failed: /usr/bin/git -c core.quotepath=false -c color.ui=false rev-parse --show-toplevel • not a git repository (or any parent up to mount point /home) • Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set). • 15 ms
+
+[2022-05-14 18:25:12.971] [GIT  ] [/home/cubet/.cfg] git blame --root --incremental --contents - -- .bash_motd • Command failed: /usr/bin/git -c core.quotepath=false -c color.ui=false blame --root --incremental --contents - -- .bash_motd • no such ref: HEAD • 9 ms
+
+[2022-05-14 18:25:14.393] [GIT  ] [/home/cubet/.cfg] git blame --root --incremental --contents - -- .bash_profile • Command failed: /usr/bin/git -c core.quotepath=false -c color.ui=false blame --root --incremental --contents - -- .bash_profile • no such ref: HEAD • 4 ms
+
+[2022-05-14 18:25:15.792] [GIT  ] [/home/cubet/.cfg] git blame --root --incremental --contents - -- .bashrc • Command failed: /usr/bin/git -c core.quotepath=false -c color.ui=false blame --root --incremental --contents - -- .bashrc • no such ref: HEAD • 8 ms
+
+[2022-05-14 18:25:16.967] [GIT  ] [/home/cubet/.cfg] git blame --root --incremental --contents - -- .bash_logout • Command failed: /usr/bin/git -c core.quotepath=false -c color.ui=false blame --root --incremental --contents - -- .bash_logout • no such ref: HEAD • 8 ms
+
+[2022-05-14 18:25:17.699] [GIT  ] [/home/cubet/.cfg] git blame --root --incremental --contents - -- .bash_aliases • Command failed: /usr/bin/git -c core.quotepath=false -c color.ui=false blame --root --incremental --contents - -- .bash_aliases • no such ref: HEAD • 3 ms
+

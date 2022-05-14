@@ -1,0 +1,18 @@
+[2022-05-13 15:43:51.197] [sharedprocess] [info] Starting worker process with pid 185946 (type: fileWatcher, window: 1).
+[2022-05-13 16:39:11.393] [sharedprocess] [info] Getting Manifest... xdebug.php-debug
+[2022-05-13 16:39:11.398] [sharedprocess] [info] Installing extension: xdebug.php-debug
+[2022-05-13 16:39:13.169] [sharedprocess] [info] Downloaded extension: xdebug.php-debug /home/cubet/.config/Code/CachedExtensionVSIXs/xdebug.php-debug-1.26.1
+[2022-05-13 16:39:13.778] [sharedprocess] [info] Extracted extension to /home/cubet/.vscode/extensions/.ead8be97-fd15-40ea-b8e4-9efc2d7dda1d: xdebug.php-debug
+[2022-05-13 16:39:13.785] [sharedprocess] [info] Renamed to /home/cubet/.vscode/extensions/xdebug.php-debug-1.26.1
+[2022-05-13 16:39:13.788] [sharedprocess] [info] Extracting completed. xdebug.php-debug
+[2022-05-13 16:39:13.789] [sharedprocess] [info] Extension installed successfully: xdebug.php-debug
+[2022-05-13 16:39:24.933] [sharedprocess] [info] Worker process with pid 185946 terminated normally (type: fileWatcher, window: 1).
+[2022-05-13 16:39:27.332] [sharedprocess] [info] Starting worker process with pid 232105 (type: fileWatcher, window: 1).
+[2022-05-13 16:40:17.645] [sharedprocess] [info] Worker process with pid 232105 terminated normally (type: fileWatcher, window: 1).
+[2022-05-13 16:40:20.053] [sharedprocess] [info] Starting worker process with pid 232916 (type: fileWatcher, window: 1).
+[2022-05-13 16:53:06.108] [sharedprocess] [info] [SharedProcessTunnelService] Created tunnel 1: localhost:9001 (local) to 0:0:0:0:0:0:0:0:9001 (remote).
+[2022-05-13 17:00:47.356] [sharedprocess] [info] [SharedProcessTunnelService] Disposing tunnel 1.
+[2022-05-13 17:00:55.681] [sharedprocess] [info] Worker process with pid 232916 terminated normally (type: fileWatcher, window: 1).
+[2022-05-13 17:00:58.168] [sharedprocess] [info] Starting worker process with pid 257655 (type: fileWatcher, window: 1).
+[2022-05-13 17:15:43.583] [sharedprocess] [info] Worker process with pid 257655 terminated normally (type: fileWatcher, window: 1).
+[2022-05-13 17:15:46.346] [sharedprocess] [info] Starting worker process with pid 477214 (type: fileWatcher, window: 1).

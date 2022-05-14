@@ -1,0 +1,23 @@
+[2022-05-14 22:11:30.163] [exthost] [info] Extension host with pid 14192 started
+[2022-05-14 22:11:30.163] [exthost] [info] Skipping acquiring lock for /home/cubet/.config/Code/User/workspaceStorage/4ed86f3e6ce587fd71c0b68ab4946c0b.
+[2022-05-14 22:11:30.180] [exthost] [info] $getCanonicalURI invoked for authority (dev-container)
+[2022-05-14 22:11:30.184] [exthost] [info] ExtensionService#_doActivateExtension ms-vscode-remote.remote-containers, startup: false, activationEvent: 'onResolveRemoteAuthority:dev-container'
+[2022-05-14 22:11:30.278] [exthost] [info] $resolveAuthority invoked for authority (dev-container)
+[2022-05-14 22:11:37.358] [exthost] [info] Eager extensions activated
+[2022-05-14 22:11:37.471] [exthost] [info] Extension host terminating: renderer closed the socket
+[2022-05-14 22:11:37.480] [exthost] [info] Extension host with pid 14192 exiting with code 0
+[2022-05-14 22:11:39.818] [exthost] [info] Extension host with pid 16306 started
+[2022-05-14 22:11:39.818] [exthost] [info] Skipping acquiring lock for /home/cubet/.config/Code/User/workspaceStorage/73ae41e0084915c3f7af1c5d865d8e70.
+[2022-05-14 22:11:39.997] [exthost] [info] ExtensionService#_doActivateExtension vscode.php-language-features, startup: false, activationEvent: 'onLanguage:php'
+[2022-05-14 22:11:40.056] [exthost] [info] ExtensionService#_doActivateExtension vscode.microsoft-authentication, startup: false, activationEvent: 'onAuthenticationRequest:microsoft'
+[2022-05-14 22:11:40.117] [exthost] [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: true, activationEvent: '*'
+[2022-05-14 22:11:40.132] [exthost] [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+[2022-05-14 22:11:40.151] [exthost] [info] ExtensionService#_doActivateExtension vscode.ipynb, startup: true, activationEvent: '*'
+[2022-05-14 22:11:40.199] [exthost] [info] ExtensionService#_doActivateExtension ms-vscode-remote.remote-containers, startup: true, activationEvent: 'workspaceContains:.devcontainer/devcontainer.json'
+[2022-05-14 22:11:40.465] [exthost] [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+[2022-05-14 22:11:40.568] [exthost] [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+[2022-05-14 22:11:40.753] [exthost] [info] Eager extensions activated
+[2022-05-14 22:11:40.803] [exthost] [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onStartupFinished'
+[2022-05-14 22:11:40.862] [exthost] [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+[2022-05-14 22:11:40.876] [exthost] [info] ExtensionService#_doActivateExtension eamodio.gitlens, startup: false, activationEvent: 'onStartupFinished'
+[2022-05-14 22:11:41.332] [exthost] [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'

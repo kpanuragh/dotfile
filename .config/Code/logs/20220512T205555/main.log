@@ -1,0 +1,20 @@
+[2022-05-12 20:55:55.810] [main] [info] window#load: attempt to load window (id: 1)
+[2022-05-12 20:55:55.827] [main] [info] update#setState idle
+[2022-05-12 20:55:55.865] [main] [info] ExtensionHostStarterWorker created
+[2022-05-12 20:55:56.749] [main] [info] window#load: window reported ready (id: 1)
+[2022-05-12 20:55:56.903] [main] [info] Starting extension host with pid 110684 (fork() took 10 ms).
+[2022-05-12 20:55:56.904] [main] [info] ExtensionHostStarterWorker.start() took 13 ms.
+[2022-05-12 20:56:25.837] [main] [info] update#setState checking for updates
+[2022-05-12 20:56:25.848] [main] [info] update#setState available for download
+[2022-05-13 01:42:06.304] [main] [error] [uncaught exception in main]: Error: SharedProcess: crashed (detail: killed, code: 15)
+[2022-05-13 01:42:06.304] [main] [error] Error: SharedProcess: crashed (detail: killed, code: 15)
+    at /usr/share/code/resources/app/out/vs/code/electron-main/main.js:75:74873
+    at h.invoke (/usr/share/code/resources/app/out/vs/code/electron-main/main.js:16:145)
+    at C.deliver (/usr/share/code/resources/app/out/vs/code/electron-main/main.js:16:2269)
+    at m.fire (/usr/share/code/resources/app/out/vs/code/electron-main/main.js:16:1847)
+    at /usr/share/code/resources/app/out/vs/code/electron-main/main.js:14:29683
+    at h.invoke (/usr/share/code/resources/app/out/vs/code/electron-main/main.js:16:145)
+    at C.deliver (/usr/share/code/resources/app/out/vs/code/electron-main/main.js:16:2269)
+    at m.fire (/usr/share/code/resources/app/out/vs/code/electron-main/main.js:16:1847)
+    at EventEmitter.<anonymous> (/usr/share/code/resources/app/out/vs/code/electron-main/main.js:74:7676)
+    at EventEmitter.emit (node:events:402:35)

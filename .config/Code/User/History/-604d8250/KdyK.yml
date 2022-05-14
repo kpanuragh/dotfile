@@ -1,0 +1,16 @@
+version: "2"
+services:
+  web:
+    build: ./docker/lms/.
+    volumes:
+      - ./:/app
+    ports:
+      - 3000:3000
+    links:
+      - mongodb
+  mongodb:
+    image: bitnami/mongodb:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - ./docker/mongo:/bitnami/mongodb

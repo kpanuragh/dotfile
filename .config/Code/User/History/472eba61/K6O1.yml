@@ -1,0 +1,157 @@
+version: '3.7'
+
+services:
+    oelms-app:
+        user: "root"
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        environment:
+            XDEBUG_CONFIG: remote_host=172.17.0.1
+        image: 'laravel_apache'
+        container_name: oelms-app
+        ports:
+            - "80:80"
+        volumes:
+            - ../:/var/www/html
+            - ./config/logs/:/var/log/cron
+            - ./tmp:/tmp
+        networks:
+            - laravel-oelms
+        depends_on:
+            - mysql
+        extra_hosts:
+            - "openlms.local.com:127.0.0.1"
+    # oelms-app2:
+    #     build:
+    #         context: .
+    #         dockerfile: ./Dockerfile
+    #     environment:
+    #         XDEBUG_CONFIG: remote_host=172.17.0.1
+    #     image: 'laravel_apache'
+    #     container_name: oelms-app2
+    #     volumes:
+    #         - ../:/var/www/html
+    #         - ./config/logs/:/var/log/cron
+    #         - ./tmp:/tmp
+    #     networks:
+    #         - laravel-oelms
+    #     depends_on:
+    #         - mysql
+    #     extra_hosts:
+    #         - "openlms.local.com:127.0.0.1"
+    # oelms-app3:
+    #     build:
+    #         context: .
+    #         dockerfile: ./Dockerfile
+    #     environment:
+    #         XDEBUG_CONFIG: remote_host=172.17.0.1
+    #     image: 'laravel_apache'
+    #     container_name: oelms-app3
+    #     volumes:
+    #         - ../:/var/www/html
+    #         - ./config/logs/:/var/log/cron
+    #         - ./tmp:/tmp
+    #     networks:
+    #         - laravel-oelms
+    #     depends_on:
+    #         - mysql
+    #     extra_hosts:
+    #         - "openlms.local.com:127.0.0.1"
+    # oelms-app4:
+    #     build:
+    #         context: .
+    #         dockerfile: ./Dockerfile
+    #     environment:
+    #         XDEBUG_CONFIG: remote_host=172.17.0.1
+    #     image: 'laravel_apache'
+    #     container_name: oelms-app4
+    #     volumes:
+    #         - ../:/var/www/html
+    #         - ./config/logs/:/var/log/cron
+    #         - ./tmp:/tmp
+    #     networks:
+    #         - laravel-oelms
+    #     depends_on:
+    #         - mysql
+    #     extra_hosts:
+    #         - "openlms.local.com:127.0.0.1"
+    # oelms-app5:
+    #     build:
+    #         context: .
+    #         dockerfile: ./Dockerfile
+    #     environment:
+    #         XDEBUG_CONFIG: remote_host=172.17.0.1
+    #     image: 'laravel_apache'
+    #     container_name: oelms-app5
+    #     volumes:
+    #         - ../:/var/www/html
+    #         - ./config/logs/:/var/log/cron
+    #         - ./tmp:/tmp
+    #     networks:
+    #         - laravel-oelms
+    #     depends_on:
+    #         - mysql
+    #     extra_hosts:
+    #         - "openlms.local.com:127.0.0.1"
+    mysql:
+        image: 'mariadb:10.3.32'
+        container_name: oelms-laravel-db
+        restart: unless-stopped
+        ports:
+            - "3306:3306"
+        command: mysqld --sql_mode="NO_ENGINE_SUBSTITUTION"
+        environment:
+            MYSQL_DATABASE: openelms_dev
+            MYSQL_ROOT_PASSWORD: dev
+            MYSQL_PASSWORD: dev
+            MYSQL_USER: dev
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        volumes:
+            - ./database/dbdata:/var/lib/mysql
+        networks:
+            - laravel-oelms
+    mailhog:
+        image: mailhog/mailhog
+        container_name: oelms-mail
+        logging:
+            driver: 'none'  # disable saving logs
+        ports:
+        - 1025:1025 # smtp server
+        - 8025:8025 # web ui
+        networks:
+            - laravel-oelms
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: oelms-phpmyadmin
+        links: 
+            - "mysql"
+        ports:
+            - 8000:80
+        environment:
+            PMA_HOST: oelms-laravel-db
+            MYSQL_USER: dev
+            MYSQL_PASSWORD: dev
+            MYSQL_ROOT_PASSWORD: dev
+            UPLOAD_LIMIT: 700M
+        networks:
+            - laravel-oelms
+    # haproxy:  # Haproxy service  
+    #     image: haproxytech/haproxy-alpine  # Official HAProxy image  
+    #     ports:  
+    #         - 80:80  
+    #         - 8404:8404
+    #     container_name: 'oelms-haproxy' # Name of the container  
+    #     volumes:  # HAProxy configuration volume mount   
+    #         - './config/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro' 
+    #     depends_on:
+    #         - oelms-app1
+    #         - oelms-app2
+    #         - oelms-app3
+    #         - oelms-app4
+    #         - oelms-app5
+    #     networks:
+    #         - laravel-oelms 
+networks:
+    laravel-oelms:
+        driver: bridge

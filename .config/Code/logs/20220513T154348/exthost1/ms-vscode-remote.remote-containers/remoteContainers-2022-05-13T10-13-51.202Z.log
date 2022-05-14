@@ -1,0 +1,14 @@
+[2022-05-13T11:09:24.210Z] Start: Run: docker version --format {{.Server.APIVersion}}
+[2022-05-13T11:09:24.210Z] Remote-Containers 0.234.0 in VS Code 1.67.0 (57fd6d0195bb9b9d1b49f6da5db789060795de47).
+[2022-05-13T11:09:24.251Z] Stop (41 ms): Run: docker version --format {{.Server.APIVersion}}
+[2022-05-13T11:09:24.252Z] 1.41
+[2022-05-13T11:09:24.265Z] Start: Run: /usr/share/code/code /home/cubet/.vscode/extensions/ms-vscode-remote.remote-containers-0.234.0/dist/spec-node/devContainersSpecCLI.js read-configuration --workspace-folder /home/cubet/backup/cubetBackup/oelms9 --log-level debug --log-format json --config /home/cubet/backup/cubetBackup/oelms9/.devcontainer/devcontainer.json --mount-workspace-git-root true
+[2022-05-13T11:09:24.418Z] Stop (153 ms): Run: /usr/share/code/code /home/cubet/.vscode/extensions/ms-vscode-remote.remote-containers-0.234.0/dist/spec-node/devContainersSpecCLI.js read-configuration --workspace-folder /home/cubet/backup/cubetBackup/oelms9 --log-level debug --log-format json --config /home/cubet/backup/cubetBackup/oelms9/.devcontainer/devcontainer.json --mount-workspace-git-root true
+[2022-05-13T11:09:24.419Z] Start: Run: docker-compose version --short
+[2022-05-13T11:09:24.613Z] Stop (194 ms): Run: docker-compose version --short
+[2022-05-13T11:09:24.613Z] Start: Run: docker-compose version
+[2022-05-13T11:09:24.817Z] Stop (204 ms): Run: docker-compose version
+[2022-05-13T11:09:24.818Z] Start: Run: docker ps -q -a --filter label=com.docker.compose.project=docker --filter label=com.docker.compose.service=oelms-app
+[2022-05-13T11:09:24.848Z] Stop (30 ms): Run: docker ps -q -a --filter label=com.docker.compose.project=docker --filter label=com.docker.compose.service=oelms-app
+[2022-05-13T11:09:24.848Z] Start: Run: docker inspect --type container 10c48d9e4751
+[2022-05-13T11:09:24.875Z] Stop (27 ms): Run: docker inspect --type container 10c48d9e4751

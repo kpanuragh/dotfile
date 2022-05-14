@@ -1,0 +1,17 @@
+[2022-05-13 17:15:53.339] [renderer1] [info] Invoking resolveAuthority(dev-container)
+[2022-05-13 17:33:38.268] [renderer1] [info] resolveAuthority(dev-container) returned '127.0.0.1:33305' after 1064929 ms
+[2022-05-13 17:33:54.810] [renderer1] [error] RequestService#request (browser) - error https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery {"name":"Canceled"}
+[2022-05-13 17:34:32.458] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-13 17:34:32.458] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-13 17:34:32.459] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-13 17:34:32.459] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-13 17:34:32.459] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-13 17:34:32.459] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-13 17:34:32.459] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-13 17:34:41.055] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-13 17:34:41.055] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-13 17:34:41.055] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-13 17:34:41.056] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-13 17:34:41.056] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-13 17:34:41.056] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-13 17:34:41.056] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command

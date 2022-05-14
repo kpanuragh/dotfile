@@ -1,0 +1,18 @@
+version: "2"
+services:
+  web:
+    build: ./docker/lms/.
+    volumes:
+      - ./:/app
+    ports:
+      - 3000:3000
+    links:
+      - mongodb
+  mongodb:
+    build: mongo:5.0
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+  volumes:
+  mongodb_data_container:

@@ -1,0 +1,2 @@
+[2022-05-14 23:56:31.580] [renderer1] [error] [File Watcher (parcel)] Inotify limit reached (ENOSPC) (path: /home/cubet)
+[2022-05-15 00:13:00.870] [renderer1] [warning] [File Watcher (node.js)] Watcher shutdown because watched path got deleted

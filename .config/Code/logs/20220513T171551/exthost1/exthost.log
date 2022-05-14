@@ -1,0 +1,8 @@
+[2022-05-13 17:15:53.156] [exthost] [info] Extension host with pid 478107 started
+[2022-05-13 17:15:53.156] [exthost] [info] Skipping acquiring lock for /home/cubet/.config/Code/User/workspaceStorage/4ed86f3e6ce587fd71c0b68ab4946c0b.
+[2022-05-13 17:15:53.174] [exthost] [info] $getCanonicalURI invoked for authority (dev-container)
+[2022-05-13 17:15:53.182] [exthost] [info] ExtensionService#_doActivateExtension ms-vscode-remote.remote-containers, startup: false, activationEvent: 'onResolveRemoteAuthority:dev-container'
+[2022-05-13 17:15:53.339] [exthost] [info] $resolveAuthority invoked for authority (dev-container)
+[2022-05-13 17:33:39.981] [exthost] [info] Eager extensions activated
+[2022-05-13 17:33:40.064] [exthost] [info] ExtensionService#_doActivateExtension vscode.microsoft-authentication, startup: false, activationEvent: 'onAuthenticationRequest:microsoft'
+[2022-05-13 17:33:40.389] [exthost] [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'

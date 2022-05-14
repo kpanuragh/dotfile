@@ -1,0 +1,359 @@
+<div class="learner-tasks" ng-controller="Schedule">
+	<div class="u-padding--bottom-ten btn-group"  ng-if="rs.check('is_cd')">
+		<a class="btn btn-default" href="" ng-click="sserv.openEvent()">
+			<i class="glyphicon glyphicon-plus"></i>
+			Assign Training
+		</a>
+		<a class="btn btn-default" href="" ng-click="importEventModal()">
+			<i class="glyphicon glyphicon-plus"></i>
+			Import Events
+		</a>
+	</div>
+
+	<div class="u-padding--bottom-ten">
+		<button class="btn btn-info btn-sm" ng-click="showAllTasks()">
+			{{hiddenCalendar ? 'Show calendar' : 'Show all Events'}}
+		</button>
+	</div>
+
+
+	<div class="task-container" ng-show="hiddenCalendar">
+		<table class="table" st-table="taskEventsSt" st-set-filter="scheduleFilter" st-safe-src="taskEvents">
+			<thead>
+				<tr class="text-center">
+                                  <th st-sort="id">ID</th>
+					<th st-sort="title">Name</th>
+					<th st-sort="type">Type</th>
+					<th>%%users%%</th>
+                    <th>Min</th>
+                    <th>Max</th>
+                    <th>Required</th>
+					<th>Departments</th>
+					<th>Groups</th>
+					<th>%%managers%%</th>
+					<th st-sort="startsAt">Due Date</th>
+					<th>Action</th>
+				</tr>
+				<tr>
+
+					<th>
+						<input st-search="id" placeholder="ID" class="input-sm form-control" type="search"/>
+					</th>
+				<th>
+						<input st-search="title" placeholder="name" class="input-sm form-control" type="search"/>
+					</th>
+					<th>
+						<select st-search="type" class="input-sm form-control">
+							<option value=""></option>
+							<option value="{{event_type.slug}}" ng-repeat="event_type in event_types">
+								{{event_type.slug=='lesson'?"%%lesson%%":event_type.name}}
+							</option>
+						</select>
+					</th>
+					<th>
+						<input st-search="schedule_user_name" ng-model="schedule_user_name" placeholder="users"
+							class="input-sm form-control" type="search" />
+					</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+					<th>
+						<input st-search="schedule_department_name" ng-model="schedule_department_name"
+							placeholder="department" class="input-sm form-control" type="search" />
+					</th>
+					<th>
+						<input st-search="schedule_group_name" ng-model="schedule_group_name" placeholder="group"
+							class="input-sm form-control" type="search" />
+					</th>
+					<th>
+						<input st-search="schedule_manager_name" ng-model="schedule_manager_name" placeholder="manager"
+							class="input-sm form-control" type="search" />
+					</th>
+					<th></th>
+					<th>
+
+				</th>
+			</tr>
+			</thead>
+			<tbody ng-show="isLoading">
+			<tr>
+				<td colspan="8" class="text-center" loading-bar>Loading ... </td>
+			</tr>
+			</tbody>
+			<tbody ng-show="!isLoading">
+			<tr ng-repeat="task in taskEventsSt">
+				<td>
+					{{task.id}}
+				  </td>
+				<td>
+					{{task.title}}
+				</td>
+				<td>
+					{{task.type=='lesson'?"%%lesson%%":(event_types | filter:{slug: task.type} )[0].name}}
+				</td>
+				<td>
+					<div class="u-multi-line-ellipsis two_lines">
+							<span class="label label-default u-pointer"
+								  ng-repeat-start="user in task.users | filter: {full_name: schedule_user_name}"
+								  ng-click="lp.viewLearner(user.id)">
+								<span class="glyphicon glyphicon-eye-open"></span>
+								{{user.fname}} {{user.lname}}
+							</span> <span ng-repeat-end>&nbsp;</span>
+						</div>
+					</td>
+                    <td>{{!task.minclass?'N/A':task.minclass.toString()}}</td>
+                    <td>{{!task.maxclass?'N/A':task.maxclass}}</td>
+                    <td>{{task.minclass?(((task.minclass-task.users.length) < 0 )?'0':task.minclass-task.users.length):'N/A'}}
+					<td>
+						<div class="u-multi-line-ellipsis two_lines">
+							<span class="label label-default"
+								  ng-repeat-start="department in task.departments | filter: {name: schedule_department_name}">
+								{{department.name}}
+							</span> <span ng-repeat-end>&nbsp;</span>
+					</div>
+				</td>
+				<td>
+					<div class="u-multi-line-ellipsis two_lines">
+							<span class="label label-default"
+								  ng-repeat-start="group in task.groups | filter: {name: schedule_group_name}">
+								{{group.name}}
+							</span> <span ng-repeat-end>&nbsp;</span>
+					</div>
+				</td>
+				<td>
+					<div class="u-multi-line-ellipsis two_lines">
+							<span class="label label-default"
+								  ng-repeat-start="manager in task.managers | filter: {full_name: schedule_manager_name}">
+								{{manager.full_name}}
+							</span> <span ng-repeat-end>&nbsp;</span>
+					</div>
+				</td>
+				<td align="middle">
+					<span ng-if="task.startsAt !=null">{{task.startsAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+					<span ng-if="task.startsAt ==null">--</span>
+
+				</td>
+				<td align="middle">
+					<a href="" ng-click="calendarEventView(task)">view</a>
+				</td>
+			</tr>
+			</tbody>
+			<tfoot ng-show="!isLoading">
+			<tr>
+				<td colspan="8" class="text-center">
+					<div st-pagination="" st-items-by-page="10" st-displayed-pages="7"
+						 st-template="<?=$LMSTplsUriHTML?>pagination.html"></div>
+				</td>
+			</tr>
+			</tfoot>
+		</table>
+	</div>
+
+	<div class="calendar-container" ng-show="!hiddenCalendar" ng-if="rs.check('is_cd')">
+		<div class="u-flexbox u-flexbox--wrap u-flexbox--justify-space">
+			<div class="">
+				<div class="btn-group u-flexbox u-padding--bottom-ten">
+					<button class="btn btn-primary" mwl-date-modifier date="sserv.viewDate" decrement="calendarView"
+							ng-click="cellIsOpen = false">
+						Previous
+					</button>
+					<div class="input-group">
+						<input type="text" class="form-control u-width--hundred-px" id="user-expiration_dt"
+							   uib-datepicker-popup="dd/MM/yyyy" ng-model="sserv.viewDate" ng-readonly="true"
+							   is-open="day_open" datepicker-options="DTOptions" close-text="Close"
+							   ng-click="day_open = !day_open" />
+					</div>
+					<button class="btn btn-primary" mwl-date-modifier date="sserv.viewDate" increment="calendarView"
+							ng-click="cellIsOpen = false">
+						Next
+					</button>
+				</div>
+			</div>
+			<div class="">
+				<div class="btn-group u-flexbox u-padding--bottom-ten">
+					<label class="btn btn-dark" ng-model="calendarView" uib-btn-radio="'year'"
+						   ng-click="cellIsOpen = false">Year</label>
+					<label class="btn btn-dark" ng-model="calendarView" uib-btn-radio="'month'"
+						   ng-click="cellIsOpen = false">Month</label>
+					<label class="btn btn-dark" ng-model="calendarView" uib-btn-radio="'week'"
+						   ng-click="cellIsOpen = false">Week</label>
+					<label class="btn btn-dark" ng-model="calendarView" uib-btn-radio="'day'"
+						   ng-click="cellIsOpen = false">Day</label>
+				</div>
+			</div>
+			<div>
+				<div class="btn-group u-flexbox u-padding--bottom-ten" ng-if="rs.check('is_cd')">
+					<select ng-model="sserv.filterList.manager_id" class="input-sm form-control">
+						<option value="">-- Select %%manager%% --</option>
+						<option ng-value="manager.id"
+								ng-repeat="manager in managers | orderBy : ['fname', 'lname'] | filter: {role: {exclude_manager_from_schedule: false}}">
+							{{manager.fname}} {{manager.lname}}
+						</option>
+					</select>
+					<select ng-model="sserv.filterList.department_id" class="input-sm form-control">
+						<option value="">-- Select Department --</option>
+						<option ng-value="department.id" ng-repeat="department in departments | orderBy : ['name']">
+							{{department.name}}
+						</option>
+					</select>
+					<select ng-model="sserv.filterList.groups_id" class="input-sm form-control">
+						<option value="">-- Select Group --</option>
+						<option ng-value="group.id" ng-repeat="group in groups | orderBy : ['name']">
+							{{group.name}}
+						</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12"></div>
+		</div>
+
+		<div class="row" ng-if="rs.check('is_cd')">
+			<div class="col-xs-12 u-overflow--x-scroll">
+				<div class="u-flexbox">
+					<div ng-repeat="manager in manager_list | filter: managerFilter"
+						 class="u-width--min-200px u-flex--no-shrink u-flex--grow">
+						<div class="u-text--center">
+							<strong>
+								{{manager.fname}} {{manager.lname}}
+							</strong>
+						</div>
+						<div>
+							<mwl-calendar
+								on-event-click="calendarEventView(calendarEvent)"
+								day-view-event-width="auto"
+								day-view-start="{{startTime}}"
+		                        day-view-end="{{endTime}}"
+								class="cd-task-calendar"
+								view="calendarView"
+								view-date="sserv.viewDate"
+								events="manager.eventList"
+								view-title="calendarTitle"
+								cell-is-open="true"
+								day-view-time-position="{{$index > 0 ? 'hidden' : ''}}">
+							</mwl-calendar>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="calendar-container" ng-show="!hiddenCalendar" ng-if="!rs.check('is_cd')">
+		<div class="u-flexbox u-flexbox--wrap u-flexbox--justify-space">
+			<div class="">
+				<div class="btn-group u-flexbox u-padding--bottom-ten">
+					<button class="btn btn-primary" mwl-date-modifier date="sserv.viewDate" decrement="calendarView"
+							ng-click="cellIsOpen = false">
+						Previous
+					</button>
+					<div class="input-group">
+						<input type="text" class="form-control u-width--hundred-px" id="user-expiration_dt"
+							   uib-datepicker-popup="dd/MM/yyyy" ng-model="sserv.viewDate" ng-readonly="true"
+							   is-open="day_open" datepicker-options="DTOptions" close-text="Close"
+							   ng-click="day_open = !day_open" />
+					</div>
+					<button class="btn btn-primary" mwl-date-modifier date="sserv.viewDate" increment="calendarView"
+							ng-click="cellIsOpen = false">
+						Next
+					</button>
+				</div>
+			</div>
+			<div class="">
+				<div class="btn-group u-flexbox u-padding--bottom-ten">
+					<label class="btn btn-dark" ng-model="calendarView" uib-btn-radio="'year'"
+						   ng-click="cellIsOpen = false">Year</label>
+					<label class="btn btn-dark" ng-model="calendarView" uib-btn-radio="'month'"
+						   ng-click="cellIsOpen = false">Month</label>
+					<label class="btn btn-dark" ng-model="calendarView" uib-btn-radio="'week'"
+						   ng-click="cellIsOpen = false">Week</label>
+					<label class="btn btn-dark" ng-model="calendarView" uib-btn-radio="'day'"
+						   ng-click="cellIsOpen = false">Day</label>
+				</div>
+			</div>
+			<div>
+				<span ng-if="!rs.check('is_cd')" class="u-bold u-decoration--underline">
+					{{sserv.viewDate | dateToISO | dateSuffix}} {{sserv.viewDate | dateToISO | date:'MMMM, yyyy'}}
+				</span>
+				<div class="btn-group u-flexbox u-padding--bottom-ten" ng-if="rs.check('is_cd')">
+					<select ng-model="sserv.filterList.manager_id" class="input-sm form-control">
+						<option value="">-- Select %%manager%% --</option>
+						<option ng-value="manager.id" ng-repeat="manager in managers | orderBy : ['fname', 'lname'] | filter: {role: {exclude_manager_from_schedule: false}}">
+							{{manager.fname}} {{manager.lname}}
+						</option>
+					</select>
+					<select ng-model="sserv.filterList.department_id" class="input-sm form-control">
+						<option value="">-- Select Department --</option>
+						<option ng-value="department.id" ng-repeat="department in departments | orderBy : ['name']">
+							{{department.name}}
+						</option>
+					</select>
+					<select ng-model="sserv.filterList.groups_id" class="input-sm form-control">
+						<option value="">-- Select Group --</option>
+						<option ng-value="group.id" ng-repeat="group in groups | orderBy : ['name']">
+							{{group.name}}
+						</option>
+					</select>
+
+
+				</div>
+			</div>
+			<div class="">
+				<div class="btn-group u-flexbox u-flexbox--justify-end">
+					<button class="btn btn-info" ng-click="sserv.openEvent()" ng-if="rs.check('is_cd')">
+						<i class="glyphicon glyphicon-plus"></i>
+						Assign Training
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12"></div>
+		</div>
+
+		<div class="row" ng-if="rs.check('is_cd')">
+			<div class="col-xs-12 u-overflow--x-scroll">
+				<div class="u-flexbox">
+					<div ng-repeat="manager in manager_list | filter: managerFilter" class="u-width--min-200px u-flex--no-shrink u-flex--grow">
+						<div class="u-text--center">
+							<strong>
+								{{manager.fname}} {{manager.lname}}
+							</strong>
+						</div>
+						<div>
+							<mwl-calendar
+								on-event-click="calendarEventView(calendarEvent)"
+								day-view-event-width="auto"
+								day-view-start="{{startTime}}"
+		                        day-view-end="{{endTime}}"
+								class="cd-task-calendar"
+								view="calendarView"
+								view-date="sserv.viewDate"
+								events="manager.eventList"
+								view-title="calendarTitle"
+								cell-is-open="true"
+								day-view-time-position="{{$index > 0 ? 'hidden' : ''}}">
+							</mwl-calendar>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<mwl-calendar
+			ng-if="!rs.check('is_cd')"
+			on-event-click="calendarEventView(calendarEvent)"
+			day-view-event-width="500"
+			day-view-start="{{startTime}}"
+		    day-view-end="{{endTime}}"
+			class="task-calendar"
+			view="calendarView"
+			view-date="sserv.viewDate"
+			events="taskEvents"
+			view-title="calendarTitle"
+			on-event-times-changed="calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
+			cell-is-open="true">
+		</mwl-calendar>
+	</div>
+</div>
+<ng-include src="'<?=$LMSTplsUriHTML?>addtocalendar-schedule.html'"></ng-include>

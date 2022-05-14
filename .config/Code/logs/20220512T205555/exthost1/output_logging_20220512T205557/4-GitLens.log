@@ -1,0 +1,6 @@
+[2022-05-12 15:33:02.385] [GIT  ] [/home/cubet/backup/cubetBackup/oelms9] git log --format=%x3cr%x3e%x20%H -n3 -m -L 575,575:src/tpls/js/services/list-action.js • Command failed: /usr/bin/git -c core.quotepath=false -c color.ui=false -c log.showSignature=false log --format=%x3cr%x3e%x20%H -n3 -m -L 575,575:src/tpls/js/services/list-action.js • file src/tpls/js/services/list-action.js has only 567 lines • 6 ms
+
+[2022-05-12 15:51:12.383] [GIT  ] [/home/cubet/backup/cubetBackup/oelms9] git log --format=%x3cr%x3e%x20%H -n3 -m -L 105,105:src/tpls/html/print-form.html • Command failed: /usr/bin/git -c core.quotepath=false -c color.ui=false -c log.showSignature=false log --format=%x3cr%x3e%x20%H -n3 -m -L 105,105:src/tpls/html/print-form.html • file src/tpls/html/print-form.html has only 91 lines • 10 ms
+
+[2022-05-12 15:52:28.459] [GIT  ] [/home/cubet/backup/cubetBackup/oelms9] git log --format=%x3cr%x3e%x20%H -n3 -m -L 124,124:src/tpls/html/print-form.html • Command failed: /usr/bin/git -c core.quotepath=false -c color.ui=false -c log.showSignature=false log --format=%x3cr%x3e%x20%H -n3 -m -L 124,124:src/tpls/html/print-form.html • file src/tpls/html/print-form.html has only 91 lines • 7 ms
+

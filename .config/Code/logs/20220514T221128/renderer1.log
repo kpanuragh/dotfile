@@ -1,0 +1,10 @@
+[2022-05-14 22:11:30.277] [renderer1] [info] Invoking resolveAuthority(dev-container)
+[2022-05-14 22:11:34.324] [renderer1] [error] RequestService#request (browser) - error https://vscodeexperiments.azureedge.net/experiments/vscode-experiments.json {}
+[2022-05-14 22:11:34.463] [renderer1] [info] resolveAuthority(dev-container) returned '127.0.0.1:34823' after 4186 ms
+[2022-05-14 22:11:35.921] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-14 22:11:35.921] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-14 22:11:35.921] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-14 22:11:35.922] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-14 22:11:35.922] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-14 22:11:35.923] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+[2022-05-14 22:11:35.923] [renderer1] [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command

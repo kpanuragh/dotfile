@@ -1,0 +1,30 @@
+[2022-05-13 15:43:48.818] [main] [info] window#load: attempt to load window (id: 1)
+[2022-05-13 15:43:48.838] [main] [info] update#setState idle
+[2022-05-13 15:43:48.892] [main] [info] ExtensionHostStarterWorker created
+[2022-05-13 15:43:49.763] [main] [info] window#load: window reported ready (id: 1)
+[2022-05-13 15:43:49.921] [main] [info] Starting extension host with pid 185479 (fork() took 13 ms).
+[2022-05-13 15:43:49.921] [main] [info] ExtensionHostStarterWorker.start() took 14 ms.
+[2022-05-13 15:44:18.840] [main] [info] update#setState checking for updates
+[2022-05-13 15:44:18.848] [main] [info] update#setState available for download
+[2022-05-13 15:54:10.908] [main] [info] Enabling inspect port on extension host with pid 185479.
+[2022-05-13 16:39:24.919] [main] [info] window#load: attempt to load window (id: 1)
+[2022-05-13 16:39:24.975] [main] [info] Extension host with pid 185479 exited with code: 0, signal: null.
+[2022-05-13 16:39:25.619] [main] [info] window#load: window reported ready (id: 1)
+[2022-05-13 16:39:25.753] [main] [info] Starting extension host with pid 231609 (fork() took 14 ms).
+[2022-05-13 16:39:25.754] [main] [info] ExtensionHostStarterWorker.start() took 18 ms.
+[2022-05-13 16:40:17.634] [main] [info] window#load: attempt to load window (id: 1)
+[2022-05-13 16:40:17.648] [main] [info] Extension host with pid 231609 exited with code: 0, signal: null.
+[2022-05-13 16:40:18.341] [main] [info] window#load: window reported ready (id: 1)
+[2022-05-13 16:40:18.455] [main] [info] Starting extension host with pid 232705 (fork() took 12 ms).
+[2022-05-13 16:40:18.455] [main] [info] ExtensionHostStarterWorker.start() took 13 ms.
+[2022-05-13 17:00:55.664] [main] [info] window#load: attempt to load window (id: 1)
+[2022-05-13 17:00:55.693] [main] [info] Extension host with pid 232705 exited with code: 0, signal: null.
+[2022-05-13 17:00:56.475] [main] [info] window#load: window reported ready (id: 1)
+[2022-05-13 17:00:56.596] [main] [info] Starting extension host with pid 257502 (fork() took 12 ms).
+[2022-05-13 17:00:56.596] [main] [info] ExtensionHostStarterWorker.start() took 13 ms.
+[2022-05-13 17:15:43.568] [main] [info] window#load: attempt to load window (id: 1)
+[2022-05-13 17:15:43.579] [main] [info] Extension host with pid 257502 exited with code: 0, signal: null.
+[2022-05-13 17:15:44.792] [main] [info] window#load: window reported ready (id: 1)
+[2022-05-13 17:15:44.884] [main] [info] Starting extension host with pid 477147 (fork() took 10 ms).
+[2022-05-13 17:15:44.884] [main] [info] ExtensionHostStarterWorker.start() took 12 ms.
+[2022-05-13 17:15:45.219] [main] [info] Extension host with pid 477147 exited with code: 55, signal: null.
